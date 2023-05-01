@@ -1,0 +1,48 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title"><%= header %></h1>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table-allow-pagination border table table-striped table-hover">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Tên người dùng</th>
+                                    <th>Email</th>
+                                    <th class="non-searchable non-orderable">Quản lý</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% accounts.forEach((account,index)=>{ %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td><%= account.username %></td>
+                                    <td><%= account.name %></td>
+                                    <td><%= account.email %></td>
+                                    <td>
+                                        <button class="btn btn-warning">Sửa</button>
+                                        <button class="btn btn-danger">Xoá</button>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

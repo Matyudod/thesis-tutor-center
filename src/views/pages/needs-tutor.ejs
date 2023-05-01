@@ -1,0 +1,92 @@
+<section class="card">
+    <h5 class="card-header text-center bg-warning">
+        Lớp đang tuyển gia sư
+    </h5>
+    <div class="card-body">
+        <h6 class="card-title">Cập nhật ngày hôm nay (<%= new Date().toLocaleDateString()%>)</h6>
+        <div class="card-text">
+            <div class="d-flex flex-column">
+                <div class="container">
+                    <div class="row row-cols-3">
+                        <% classrooms.forEach((classroom)=>{%>
+                            <div class="col mb-2" role="button" title="Nhận khoá học này" onclick="window.location.href = '/class-detail/<%= classroom._id %>'">
+                                <div class="card">
+                                    <div class="card-header text-center text-primary fw-bold position-relative ">
+                                        Lớp chưa giao
+                                        <div class="position-absolute label-cards text-white px-1">
+                                            <%= classroom.code%>
+                                        </div>
+                                        <div class="trapezoid position-absolute"></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div><b>Môn dạy: </b><span class="text-secondary">
+                                                <%= classroom.subject.subject%>
+                                            </span></div>
+                                        <div><b>Lớp dạy: </b><span class="c1">
+                                                <%= classroom.class.className%>
+                                            </span></div>
+                                        <div><b>Địa chỉ: </b><span class="c2">
+                                                <%= classroom.address.address + ", "
+                                                    +classroom.address.ward.path_with_type%>
+                                            </span></div>
+                                        <div><b>Học phí có thể chấp nhận: </b><span class="c3">
+                                                <%= formatPrice(classroom.maxFee)%>/tháng
+                                            </span></div>
+                                        <div><b>Số buổi: </b><span class="c2">
+                                                <%= classroom.dayPerWeek.dayPerWeek %>
+                                            </span>
+                                        </div>
+                                        <div class="scheduleClassroom"><b>Thời gian: </b><span class="c2">
+                                                <div>
+                                                    <ul>
+                                                        <% classroom.schedules.forEach((schedule,indexSchedule)=>{ %>
+                                                            <li>
+                                                                <%= schedule.schedule + (indexSchedule
+                                                                    !=classroom.schedules.length ? ", " : "" ) %>
+                                                                    <% }) %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </span></div>
+                                        <div>
+                                            <b>Thông tin học viên: </b>
+                                            <div class="c2">
+                                                Họ tên: <%= classroom.name %>
+                                            </div>
+                                            <div class="c2">
+                                                Giới tính: <%= classroom.gender.gender %>
+                                            </div>
+                                        </div>
+                                        <div><b>Yêu cầu: </b><span class="c2">
+                                                <%= classroom.requirement %>
+                                            </span></div>
+                                        <div><b>Hình thức: </b><span class="c2">
+                                                <%= classroom.teachingForm.teachingForm %>
+                                            </span></div>
+                                        <div><b>Liên hệ: </b><span class="c2">0373.580.580 - 0932.609.268</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% })%>
+                    </div>
+                    <div row>
+                        <div aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                
+                                <li class="page-item <%= classrooms.currentPage == 1 ? "disabled" : "" %>">
+                                    <a class="page-link" href="?page=<%= classrooms.currentPage -1%>">Trước</a>
+                                </li>
+                                <% for(let i = 1 ; i <= total ; i ++){ %>
+                                    <li class="page-item <%= classrooms.currentPage == i ? "active" : "" %>" <%= classrooms.currentPage == i ? 'aria-current="page"' : "" %> ><a href="?page=<%= i%>" class="page-link <%= classrooms.currentPage == i ? "text-white" : '' %>"><%= i %></a></li>
+                                    <% } %>
+                                <li class="page-item <%= classrooms.currentPage == total ? "disabled" : "" %></li>">
+                                    <a class="page-link" href="?page=<%= classrooms.currentPage +1%>">Sau</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,226 @@
+<section class="card">
+    <h5 class="card-header text-center bg-primary text-white">
+        Giới thiệu
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="d-flex">
+                <img class="me-2" src="https://giasudatviet.com/assets/images/img3.png" alt="Image 3">
+                <div>
+                    <div>
+                        Trung tâm Gia Sư Duy Tâm
+                        chuyên cung cấp đội ngũ gia sư giỏi dạy kèm tại nhà uy tín TPHCM. Được thành lập
+                        năm 2010 với 15000 Giáo Viên, Sinh Viên, trung tâm gia sư đất việt đang là nơi
+                        tìm gia sư Chất Lượng cho quý phụ huynh, là trung tâm gia sư Uy Tín cho giáo
+                        viên, sinh viên
+                    </div>
+                    <button class="btn btn-primary mt-2">Xem thêm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="card">
+    <h5 class="card-header text-center bg-success text-white">
+        Bảng giá gia sư
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <% keyMap[1].forEach((teachingForm,indexTeachingForm)=>{
+                if(indexTeachingForm == 0){
+                %>
+                <table class="table-warning-custom w-100">
+                    <tbody>
+
+                        <% keyMap[3].forEach((grade, indexGrade)=>{
+                            %>
+
+                            <% if(indexGrade==0){ %>
+                                <tr>
+                                    <th rowspan="2" class="font-weight-bold">KHỐI LỚP</th>
+                                    <% keyMap[2].forEach((dayPerWeekKey)=>{
+                                        %>
+
+                                        <th class="font-weight-bold" colspan="<%- keyMap[0].length %>"><%- dayPerWeekKey
+                                                %>
+                                        </th>
+                                        <% }) %>
+                                </tr>
+                                <tr>
+                                    <% keyMap[2].forEach((dayPerWeekKey)=>{
+                                        %>
+                                        <% keyMap[0].forEach((levels)=>{
+                                            %>
+                                            <th class="font-weight-bold"> Mức <%- levels.toLowerCase() %></th>
+                                            <% }) %>
+
+                                                <% }) %>
+                                </tr>
+
+                                <% } %>
+
+                                    <tr>
+                                        <td><%- grade %></td>
+
+                                        <% keyMap[2].forEach((dayPerWeek)=>{
+                                            %>
+
+                                            <% keyMap[0].forEach((level)=>{
+                                                %>
+                                                <td>
+                                                    <%- formatTuition(dataMap[level+"|"
+                                                        +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMin) + " -> " +
+                                                        formatTuition(dataMap[level+"|"
+                                                        +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMax) %>
+                                                </td>
+                                                <% }) %>
+
+                                                    <% }) %>
+
+                                    </tr>
+                                    <% }) %>
+
+                    </tbody>
+                </table>
+                <div class="py-2 text-end">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    Phụ huynh, học viên chọn gia sư trực tiếp tại đây
+                    <a role="button" class="btn btn-primary" href="/choose-tutor">
+                        <i class="fa-regular fa-circle-user"></i>
+                        Chọn gia sư
+                    </a>
+                </div>
+                <table class="table-danger-custom w-100">
+                    <tbody>
+
+                        <% keyMap[3].forEach((grade, indexGrade)=>{
+                            %>
+
+                            <% if(indexGrade==0){ %>
+                                <tr>
+                                    <th class="font-weight-bold" rowspan="2">KHỐI LỚP</th>
+                                    <% keyMap[4].forEach((dayPerWeekKey)=>{
+                                        %>
+
+                                        <th class="font-weight-bold" colspan="<%- keyMap[0].length %>"><%- dayPerWeekKey
+                                                %></th>
+                                        <% }) %>
+                                </tr>
+                                <tr>
+                                    <% keyMap[4].forEach((dayPerWeekKey)=>{
+                                        %>
+                                        <% keyMap[0].forEach((levels)=>{
+                                            %>
+                                            <th class="font-weight-bold"> Mức <%- levels.toLowerCase() %></th>
+                                            <% }) %>
+
+                                                <% }) %>
+                                </tr>
+
+                                <% } %>
+
+                                    <tr>
+                                        <td><%- grade %></td>
+
+                                        <% keyMap[4].forEach((dayPerWeek)=>{
+                                            %>
+                                            <% keyMap[0].forEach((level)=>{
+                                                %>
+
+                                                <td>
+                                                    <%- formatTuition(dataMap[level+"|"
+                                                        +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMin) + " -> " +
+                                                        formatTuition(dataMap[level+"|"
+                                                        +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMax) %>
+                                                </td>
+                                                <% }) %>
+
+                                                    <% }) %>
+
+                                    </tr>
+                                    <% }) %>
+
+                    </tbody>
+                </table>
+                <div class="mt-5"></div>
+                <% } }) %>
+        </div>
+    </div>
+</section>
+<section class="card">
+    <h5 class="card-header text-center bg-warning">
+        Các lớp chuẩn bị mở
+    </h5>
+    <div class="card-body">
+        <h6 class="card-title">Cập nhật ngày hôm nay (<%= new Date().toLocaleDateString()%>)</h6>
+        <div class="card-text">
+            <div class="d-flex flex-column">
+                <div class="container">
+                    <div class="row row-cols-3">
+                        <% classes.forEach((classroom)=>{%>
+                            <div class="col mb-2" role="button" title="Xem chi tiết" onclick="window.location.href = '/class-detail/<%= classroom._id %>'">
+                                <div class="card">
+                                    <div class="card-header text-center text-primary fw-bold position-relative ">
+                                        Lớp chưa giao
+                                        <div class="position-absolute label-cards text-white px-1">
+                                            <%= classroom.code%>
+                                        </div>
+                                        <div class="trapezoid position-absolute"></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div><b>Môn dạy: </b><span class="text-secondary">
+                                                <%= classroom.subject.subject%>
+                                            </span></div>
+                                        <div><b>Lớp dạy: </b><span class="c1">
+                                                <%= classroom.class.className%>
+                                            </span></div>
+                                        <div><b>Địa chỉ: </b><span class="c2">
+                                                <%= classroom.address.address + ", "
+                                                    +classroom.address.ward.path_with_type%>
+                                            </span></div>
+                                        <div><b>Học phí có thể chấp nhận: </b><span class="c3">
+                                                <%= formatPrice(classroom.maxFee)%>/tháng
+                                            </span></div>
+                                        <div><b>Số buổi: </b><span class="c2">
+                                                <%= classroom.dayPerWeek.dayPerWeek %>
+                                            </span>
+                                        </div>
+                                        <div class="scheduleClassroom"><b>Thời gian: </b><span class="c2">
+                                                <div>
+                                                    <ul>
+                                                        <% classroom.schedules.forEach((schedule,indexSchedule)=>{ %>
+                                                            <li>
+                                                                <%= schedule.schedule + (indexSchedule
+                                                                    !=classroom.schedules.length ? ", " : "" ) %>
+                                                                    <% }) %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </span></div>
+                                        <div>
+                                            <b>Thông tin học viên: </b>
+                                            <div class="c2">
+                                                Họ tên: <%= classroom.name %>
+                                            </div>
+                                            <div class="c2">
+                                                Giới tính: <%= classroom.gender.gender %>
+                                            </div>
+                                        </div>
+                                        <div><b>Yêu cầu: </b><span class="c2">
+                                                <%= classroom.requirement %>
+                                            </span></div>
+                                        <div><b>Hình thức: </b><span class="c2">
+                                                <%= classroom.teachingForm.teachingForm %>
+                                            </span></div>
+                                        <div><b>Liên hệ: </b><span class="c2">0373.580.580 - 0932.609.268</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% })%>
+                    </div>
+                </div>
+                <button class="btn btn-primary mt-2">Xem thêm</button>
+            </div>
+        </div>
+    </div>
+</section>

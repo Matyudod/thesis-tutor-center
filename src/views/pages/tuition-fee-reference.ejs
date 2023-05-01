@@ -1,0 +1,179 @@
+<section class="card">
+    <h5 class="card-header text-center bg-primary text-white">
+        Học phí tham khảo
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="d-flex flex-column">
+                <h1>Bảng Giá Học Phí Tham Khảo Của Trung Tâm</h1>
+                <div class="text-primary">
+                    Cam Kết Gia Sư Có Bằng Cấp Đầy Đủ - Dạy Đảm Bảo Chất Lượng, Uy Tín, Tận Tâm
+                </div>
+                <div>
+                    Trung tâm cho <span class="text-danger">Học thử 1 tuần MIỄN PHÍ</span> để quý phụ huynh và các em
+                    học sinh đánh giá được chất lượng của gia sư
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section class="card">
+    <h5 class="card-header text-center bg-success text-white">
+        Bảng giá gia sư
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <% keyMap[1].forEach((teachingForm,indexTeachingForm)=>{
+                %>
+                <h5 class="text-primary">
+                    Bảng giá <%- teachingForm.toLowerCase()%>
+                </h5>
+                <table class="table-warning-custom w-100">
+                    <tbody>
+
+                        <% keyMap[3].forEach((grade, indexGrade)=>{
+                            %>
+
+                            <% if(indexGrade==0){ %>
+                                <tr>
+                                    <th rowspan="2" class="font-weight-bold">KHỐI LỚP</th>
+                                    <% keyMap[2].forEach((dayPerWeekKey)=>{
+                                        %>
+
+                                        <th class="font-weight-bold" colspan="<%- keyMap[0].length %>"><%- dayPerWeekKey
+                                                %>
+                                        </th>
+                                        <% }) %>
+                                </tr>
+                                <tr>
+                                    <% keyMap[2].forEach((dayPerWeekKey)=>{
+                                        %>
+                                        <% keyMap[0].forEach((levels)=>{
+                                            %>
+                                            <th class="font-weight-bold"> Mức <%- levels.toLowerCase() %></th>
+                                            <% }) %>
+
+                                                <% }) %>
+                                </tr>
+
+                                <% } %>
+
+                                    <tr>
+                                        <td><%- grade %></td>
+
+                                        <% keyMap[2].forEach((dayPerWeek)=>{
+                                            %>
+                                            <% keyMap[0].forEach((level)=>{
+                                                %>
+
+                                                <td>
+                                                    <%- formatTuition(dataMap[level+"|"
+                                                        +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMin) + " -> " +
+                                                        formatTuition(dataMap[level+"|"
+                                                        +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMax) %>
+                                                </td>
+                                                <% }) %>
+
+                                                    <% }) %>
+
+                                    </tr>
+                                    <% }) %>
+
+                    </tbody>
+                </table>
+                <div class="py-2 text-end">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    Phụ huynh, học viên chọn gia sư trực tiếp tại đây
+                    <a role="button" class="btn btn-primary" href="#">
+                        <i class="fa-regular fa-circle-user"></i>
+                        Chọn gia sư
+                    </a>
+                </div>
+                <table class="table-danger-custom w-100">
+                    <tbody>
+
+                        <% keyMap[3].forEach((grade, indexGrade)=>{
+                            %>
+
+                            <% if(indexGrade==0){ %>
+                                <tr>
+                                    <th class="font-weight-bold" rowspan="2">KHỐI LỚP</th>
+                                    <% keyMap[4].forEach((dayPerWeekKey)=>{
+                                        %>
+
+                                        <th class="font-weight-bold" colspan="<%- keyMap[0].length %>"><%- dayPerWeekKey
+                                                %></th>
+                                        <% }) %>
+                                </tr>
+                                <tr>
+                                    <% keyMap[4].forEach((dayPerWeekKey)=>{
+                                        %>
+                                        <% keyMap[0].forEach((levels)=>{
+                                            %>
+                                            <th class="font-weight-bold"> Mức <%- levels.toLowerCase() %></th>
+                                            <% }) %>
+
+                                                <% }) %>
+                                </tr>
+
+                                <% } %>
+
+                                    <tr>
+                                        <td><%- grade %></td>
+
+                                        <% keyMap[4].forEach((dayPerWeek)=>{
+                                            %>
+
+                                            <% keyMap[0].forEach((level)=>{
+                                                %>
+                                                <td>
+                                                    <%= formatTuition(dataMap[level+"|"
+                                                        +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMin) + " -> " +
+                                                        formatTuition(dataMap[level+"|"
+                                                        +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMax) %>
+                                                </td>
+                                                <% }) %>
+
+                                                    <% }) %>
+
+                                    </tr>
+                                    <% }) %>
+
+                    </tbody>
+                </table>
+                <div class="mt-5"></div>
+                <% }) %>
+
+                    <div class="mt-2"><span style="color: #ff0000;"><strong>Lưu ý :</strong></span></div>
+                    <div>Các khối tương ứng với các lớp:</div>
+                    <ul>
+                        <% grades.forEach((grade)=>{
+                            %>
+                            <li>
+                                <b><%- grade.grade %>: </b>
+                                <% for (var index=0; index < grade.classes.length; index++ ){ %>
+                                    <%- grade.classes[index].className + (index!=grade.classes.length-1 ? "," : '' ) %>
+                                        <% } %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <div class="mt-3">Thời gian dạy của Sinh Viên một buổi là 120 phút(2 tiếng)</div>
+                    <div class="">Thời gian dạy của Giáo Viên một buổi là 90 phút(1h 30p)</div>
+                    <div class="">Thời gian dạy của Thạc sỹ một buổi là 90 phút(1h 30p)</div>
+                    <div class="mt-3">
+                        Học phí trên áp dụng cho sinh viên, giáo viên có bằng cử nhân của các trường đại học
+                        khác hoặc giáo viên có bằng đại học sư phạm,thạc sỹ, giáo viên thâm niên, giáo viên dạy tại
+                        trường có kinh nghiệm dạy kèm.
+                    </div>
+                    <div class="mt-5">
+                        Mức học phí trên là tham khảo, mức học phí sẽ tăng hoặc giảm theo yêu cầu : số môn học,
+                        số người học, địa điểm học và các yêu cầu thêm khác, để biết chính xác mức học phí và được
+                        <strong>tư vấn miễn phí</strong>
+                        tìm gia sư giỏi, chất lượng
+                        &nbsp;quý phụ huynh và học viên vui lòng liên hệ: <strong class="text-danger">0399 3819
+                            555</strong>
+                    </div>
+        </div>
+    </div>
+</section>

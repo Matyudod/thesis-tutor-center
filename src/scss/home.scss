@@ -1,0 +1,67 @@
+.home-page {
+    header {
+        .navbar-brand {
+            font-weight: bold;
+        }
+    }
+    aside {
+        width: 15%;
+        button {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    }
+    article {
+        max-width: calc(70% - 3rem);
+        section {
+            table {
+                th,
+                td {
+                    padding: 5px 10px;
+                }
+            }
+            .table-warning-custom {
+                tr,
+                th,
+                td {
+                    border: 2px solid var(--bs-warning);
+                }
+            }
+            .table-danger-custom {
+                tr,
+                th,
+                td {
+                    border: 2px solid var(--bs-danger);
+                }
+            }
+            .label-cards {
+                transform: rotate(48deg);
+                top: 18px;
+                right: -5px;
+                z-index: 1;
+            }
+            .trapezoid {
+                border-bottom: 30px solid var(--bs-danger);
+                border-left: 30px solid transparent;
+                border-right: 30px solid transparent;
+                height: 0;
+                width: 115px;
+                transform: rotate(45deg);
+                top: 15px;
+                right: -28px;
+            }
+        }
+    }
+    footer {
+        .large-icon {
+            width: 40px;
+            height: 30px;
+            font-size: 30px;
+            margin-right: 1rem;
+        }
+        .label-lists-group {
+            font-size: 15px;
+            font-weight: 700;
+        }
+    }
+}

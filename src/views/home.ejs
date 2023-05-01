@@ -1,0 +1,53 @@
+<% var title="Trung Tâm Gia Sư" %>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <%- include('./partials/head.ejs', {title : title } ) %>
+    </head>
+
+    <body>
+        <main>
+            <div class="home-page">
+                <div class="d-flex flex-column">
+                    <header class="mb-2">
+                        <%- include('./partials/header.ejs', {title:title}) %>
+                    </header>
+                    <% if(page=="home" ){ %>
+                        <div class="d-flex">
+                            <div class="w-50 bg-secondary d-flex flex-column justify-content-center align-items-center">
+                                <h1>Trung tâm gia sư</h1>
+                                <h3>DUY TÂM</h3>
+                                <h5>(Liên hệ: <i>0399 3819 666</i>)</h5>
+                            </div>
+                            <dic class="w-50">
+                                <%- include('./partials/carousel.ejs') %>
+                            </dic>
+                        </div>
+
+                        <% } %>
+                            <div class="d-flex">
+                                <aside class="d-flex flex-column">
+                                    <%- include('./partials/aside-left.ejs',{title:title}) %>
+                                </aside>
+                                <article class="d-flex flex-column flex-grow-1 mx-4">
+                                    <%- include('./pages/'+page+'.ejs',{title:title}) %>
+                                </article>
+                                <aside class="d-flex flex-column">
+                                    <%- include('./partials/aside-right.ejs',{title:title}) %>
+                                </aside>
+                            </div>
+                            <footer class="mt-5 shadow-lg p-5">
+                                <%- include('./partials/footer.ejs',{title:title}) %>
+                            </footer>
+                </div>
+            </div>
+        </main>
+        <% dialogMessage=typeof dialogMessage !='undefined' ? dialogMessage : undefined; %>
+            <%- include('./partials/dialog', {dialog_message : dialogMessage } ) %>
+
+                <%- include('./partials/importScript') %>
+
+    </body>
+
+    </html>

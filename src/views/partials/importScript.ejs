@@ -1,0 +1,22 @@
+<%- include('./change-password') %>
+<script>
+    if(document.querySelector('#returnUrlOfDialogChangePsw')){
+        document.querySelector('#returnUrlOfDialogChangePsw').value = window.location.href;
+    }
+    
+    if(document.querySelector('#returnUrlOfDialogUpdateInfo')){
+        document.querySelector('#returnUrlOfDialogUpdateInfo').value = window.location.href;
+    }
+</script>
+<script type="application/javascript" src="/tinymce/tinymce.min.js"></script>
+<script type="application/javascript" src="/js/bootstrap.bundle.min.js"></script>
+<script type="application/javascript" src="/js/jquery.min.js"></script>
+<script type="application/javascript" src="/datatables/js/jquery.dataTables.min.js"></script>
+<script type="application/javascript" src="/js/client-javascript.js"></script>
+<script type="application/javascript" src="/js/client-jquery.js"></script>
+<script type="application/javascript" src="/admin-lte/js/adminlte.min.js"></script>
+
+<% if(page == 'evaluate'){ %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<%- include('../pages/admin/partials/js-for-chart.ejs') %>
+<% } %>

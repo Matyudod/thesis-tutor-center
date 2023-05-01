@@ -1,0 +1,134 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h1 class="card-title">
+                                Quản lý bản tin
+                            </h1>
+                            <a data-bs-toggle="modal" href="#dialogAddPost" role="button"
+                                class="btn btn-primary d-flex justify-content-center align-items-center">
+                                Thêm bản tin
+                            </a>
+
+                            <a id="openDialog" data-bs-toggle="modal" href="#dialogUpdatePost" role="button"
+                                class="d-none"></a>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table-allow-pagination border table table-striped table-hover">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên bản tin</th>
+                                    <th class="non-orderable non-searchable">Quản lý</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% postList.forEach((post,index)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= index+1%>
+                                        </td>
+                                        <td>
+                                            <%= post.title%>
+                                        </td>
+                                        <td class="d-flex justify-content-around">
+                                            <form action="/admin/post-management" method="post">
+                                                <input type="text" name="id" value="<%= post._id  %>" hidden>
+                                                <button type="submit" class="btn btn-warning">Chi tiết</button>
+                                            </form>
+
+                                            <form action="/admin/post/remove" method="post">
+                                                <input type="text" name="id" value="<%= post._id  %>" hidden>
+                                                <button type="submit" class="btn btn-danger">Xoá</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<div class="modal fade" id="dialogAddPost" aria-hidden="true" aria-labelledby="dialogAddPostLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 75%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dialogAddPostLabel">Thêm bản tin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/post/new-post" method="post">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Tên bản tin</label>
+                        <input type="text" class="form-control" id="title" name="title" maxlength="255" required
+                            placeholder="Tối đa 255 ký tự">
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Nội dung bản tin</label>
+                        <textarea class="form-control active-tinymce" id="content" name="content"></textarea>
+                    </div>
+                    <button type="submit" id="submitBtnAddNewPost" hidden></button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" onclick="submitBtnAddNewPost.click()">Thêm bản
+                    tin
+                    mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+<% if(typeof selectedData!='undefined' ){ %>
+    <div class="modal fade" id="dialogUpdatePost" aria-hidden="true" aria-labelledby="dialogUpdatePostLabel"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 75%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dialogUpdatePostLabel">Cập nhật bản tin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/admin/post/update" method="post">
+                        <input type="text" name="_id" value="<%= selectedData._id  %>" hidden>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Tên bản tin</label>
+                            <input type="text" class="form-control" id="title" name="title" maxlength="255" required
+                                value="<%= selectedData.title  %>" placeholder="Tối đa 255 ký tự">
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Nội dung bản tin</label>
+                            <textarea class="form-control active-tinymce" id="content"
+                                name="content"><%= selectedData.content %></textarea>
+                        </div>
+                        <button type="submit" id="submitBtnUpdateNewPost" hidden></button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" onclick="submitBtnUpdateNewPost.click()">
+                        Cập nhật bản tin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = (e) => {
+            openDialog.click();
+        };
+    </script>
+    <% } %>

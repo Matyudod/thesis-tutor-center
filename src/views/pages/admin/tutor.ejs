@@ -1,0 +1,72 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">
+                            <%= header %>
+                        </h1>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table-allow-pagination border table table-striped table-hover">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tài khoản</th>
+                                    <th>Tên gia sư</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Giới tính</th>
+                                    <th>Địa chỉ</th>
+                                    <th class="non-orderable non-searchable">Quản lý</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% tutors.forEach((tutor,index)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= index+1%>
+                                        </td>
+                                        <td>
+                                            <%= tutor.tutor.username%>
+                                        </td>
+                                        <td>
+                                            <%= tutor.name%>
+                                        </td>
+                                        <td>
+                                            <%= tutor.phone%>
+                                        </td>
+                                        <td>
+                                            <%= tutor.gender.gender%>
+                                        </td>
+                                        <td>
+                                            <%= tutor.address.ward.path_with_type%>
+                                        </td>
+                                        <td class="d-flex justify-content-around">
+                                            <a href="/admin/tutor-detail/<%= tutor._id  %>">
+                                                <button class="btn btn-warning">Chi tiết</button>
+                                            </a>
+
+                                            <form action="/admin/tutor/remove" method="post">
+                                                <input type="text" name="id" value="<%= tutor._id  %>" hidden>
+                                                <button type="submit" class="btn btn-danger">Xoá</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

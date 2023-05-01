@@ -1,0 +1,234 @@
+<% 
+    isTutor = typeof isTutor !='undefined' ? isTutor : false;
+    isNotTutorOfThisCourse = typeof isNotTutorOfThisCourse !='undefined' ? isNotTutorOfThisCourse : false;
+    userId = typeof userId !='undefined' ? userId : "";
+%>
+<div class="admin-page">
+
+    <div class="vw-100 vh-100 background-core position-relative">
+    </div>
+    <% if(classA.currentTutor == null){ %>
+        <div class="position-absolute bottom-0 end-0 d-flex align-items-center m-4 justify-content-center"
+            style="z-index: 3;" id="actionOfTutor">
+            <% if(isTutor && isNotTutorOfThisCourse && userId != classA.user._id){ %>
+                <form action='/apply-for-course' method='post' >
+                    <input value='<%= classA._id%>' name='classroomId' hidden>
+                    <button type='submit' class='btn btn-warning m-3'>Đăng ký dạy</button>
+                </form>
+            <% }
+            if(userId == classA.user._id && !classA.isApproved){%>
+                <a href="/course-update" class='btn btn-primary m-3'>Cập nhật khóa học</a>
+            <% }%>
+        </div>
+    <% }%>
+    <div class=" vw-100 vh-100 d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+        <a href="<%= backToPrevious %>" class="fa fa-arrow-left btn-back-to-home text-white"
+            title="Trở lại"></a>
+        <div class="p-5 bg-light rounded border-1 border" style="min-width: 75%; max-width: 90%; max-height: 90%; overflow-y: scroll;">
+            <h3 class="text-center">Chi tiết khóa học</h3>
+            <div class="d-flex w-100 class-detail">
+                <table class="flex-grow-1">
+                    <tr>
+                        <td>Mã lớp học</td>
+                        <td>
+                            <%= classA.code%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tên tài khoản</td>
+                        <td>
+                            <%= classA.user.username%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tên học viên</td>
+                        <td>
+                            <%= classA.name%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Giới tính</td>
+                        <td>
+                            <%= classA.gender.gender%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại</td>
+                        <td>
+                            <%= classA.phone%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Hình thức học</td>
+                        <td>
+                            <%= classA.teachingForm.teachingForm%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Môn học</td>
+                        <td>
+                            <%= classA.subject.subject%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ</td>
+                        <td>
+                            <%= classA.address.address + ", " +classA.address.ward.path_with_type%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Trình độ học viên</td>
+                        <td>
+                            <%= classA.class.className%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Yêu cầu</td>
+                        <td>
+                            <%= classA.requirement%>
+                        </td>
+                    </tr>
+                    <% if(!classA.isCancelled){ %>
+                        <tr>
+                            <td>Trạng thái</td>
+                            <td>
+                                <%= classA.isApproved ? "Đã Duyệt" : "Chưa duyệt" %>
+                            </td>
+                        </tr>
+                        <% } else { %>
+                            <tr>
+                                <td>Trạng thái</td>
+                                <td>
+                                    <%= "Không được duyệt\nLý do : " + classA.reasonCancel%>
+                                </td>
+                            </tr>
+                            <% } %>
+
+                </table>
+                <table class="flex-grow-1">
+                    <tr>
+                        <td>Thời hạn</td>
+                        <td>
+                            <%= classA.expireMonth%> Tháng
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Số buổi</td>
+                        <td>
+                            <%= classA.dayPerWeek.dayPerWeek%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lịch học đăng ký</td>
+                        <td>
+                            <ul>
+                                <% classA.schedules.forEach((schedule)=>{%>
+                                    <li>
+                                        <%= schedule.schedule%>
+                                    </li>
+                                    <% })%>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Giảng viên được đề suất</td>
+                        <td>
+                            <% if(classA.suggestedTutors.length>0){ %>
+                                <ul>
+                                    <% classA.suggestedTutors.forEach((suggestedTutor)=>{%>
+                                        <li title="Chi tiết gia sư <%= suggestedTutor.name%>">
+                                            <a href="/class-detail/<%= suggestedTutor._id%>"><%= suggestedTutor.name%></a>
+                                        </li>
+                                        <% })} else {%>
+                                            <i>Không có gợi ý</i>
+                                            <% } %>
+                                </ul>
+                        </td>
+                    </tr>
+                    <% if(classA.currentFee !=null){ %>
+                        <tr>
+                            <td>Học phí hiện tại</td>
+                            <td>
+                                <%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND"
+                                    }).format(classA.currentFee)%>
+                            </td>
+                        </tr>
+                        <% } %>
+                            <tr>
+                                <td>Học phí tối đa</td>
+                                <td>
+                                    <%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND"
+                                        }).format(classA.maxFee)%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày gửi yêu cầu</td>
+                                <td>
+                                    <%= new Date(classA.registrationDate).toLocaleDateString()%>
+                                </td>
+                            </tr>
+                </table>
+            </div>
+            <div class="pt-3">
+                <div class="d-flex justify-content-center">
+                    <div class="px-4 py-1 bg-secondary rounded"></div>
+                    <div class="ps-1">Đang đợi đánh giá</div>
+                    <div class="ms-1 px-4 py-1 bg-info rounded"></div>
+                    <div class="ps-1">Đã đạt tiêu chí của học viên yêu cầu</div>
+                    <div class="ms-1 px-4 py-1 bg-primary rounded"></div>
+                    <div class="ps-1">Đã đạt tiêu chí của khoá học</div>
+                    <div class="ms-1 px-4 py-1 bg-success rounded"></div>
+                    <div class="ps-1">Đã nhận lớp này</div>
+                </div>
+                <table class="table-allow-pagination border table table-hover" page-length="3">
+                    <thead>
+                        <tr>
+                            <th>Tên tài khoản</th>
+                            <th>Tên giáo viên</th>
+                            <th>Số điện thoại</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Bằng cấp</th>
+                            <th>Địa chỉ</th>
+                            <th>Ngày đăng ký</th>
+                            <th class="non-orderable non-searchable">Chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% classA.tutorRegisted.forEach((tutorRegister)=>{ %>
+                            <tr
+                                class="<%= tutorRegister.status == 0 ? 'bg-secondary' : (tutorRegister.status == 1 ? 'bg-info' : (tutorRegister.status == 2 ? 'bg-primary' : 'bg-success' ) )%>">
+                                <td>
+                                    <%= tutorRegister.tutor.tutor.username%>
+                                </td>
+                                <td>
+                                    <%= tutorRegister.tutor.name%>
+                                </td>
+                                <td>
+                                    <%= tutorRegister.tutor.phone%>
+                                </td>
+                                <td>
+                                    <%= new Date(tutorRegister.tutor.birthday).toLocaleDateString()%>
+                                </td>
+                                <td>
+                                    <%= tutorRegister.tutor.gender.gender%>
+                                </td>
+                                <td>
+                                    <%= tutorRegister.tutor.tutorQualification.tutorQualification%>
+                                </td>
+                                <td>
+                                    <%= tutorRegister.tutor.address.ward.path_with_type%>
+                                </td>
+                                <td>
+                                    <%= new Date(tutorRegister.registrationDate).toLocaleDateString()%>
+                                </td>
+                                <td> <a href="/tutor-detail/<%= tutorRegister.tutor._id %>"><button class="btn btn-light">Chi tiết</button></a> </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,92 @@
+<% var title="Trung Tâm Gia Sư" %>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <%- include('./partials/head.ejs', {title : title } ) %>
+    </head>
+
+    <body>
+        <main>
+            <div class="admin-page">
+                <div class="d-flex">
+                    <aside class="d-flex flex-column position-relative">
+                        <%- include ("./pages/admin/partials/aside-left.ejs") %>
+                    </aside>
+                    <div class="d-flex flex-column flex-grow-1">
+                        <header>
+                            <%- include('./pages/admin/partials/header.ejs', {title:title}) %>
+                        </header>
+                        <div class="content-wrapper py-2" style="background-image: url('/images/background.png');">
+                            <div class="content-header">
+                                <article class=" d-flex flex-column flex-grow-1 mx-2">
+                                    <%- include('./pages/admin/'+page+'.ejs',{title:title}) %>
+                                </article>
+                            </div>
+                        </div>
+                        <footer class="shadow-lg p-5">
+                            <%- include('./pages/admin/partials/footer.ejs',{title:title}) %>
+                        </footer>
+                    </div>
+                    
+                </div>
+
+
+
+            </div>
+        </main>
+        <% dialogMessage=typeof dialogMessage !='undefined' ? dialogMessage : undefined; %>
+            <%- include('./partials/dialog', {dialog_message : dialogMessage } ) %>
+                <%- include('./partials/importScript') %>
+                    <script>
+                        var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+                        var currentTheme = localStorage.getItem('theme');
+                        var mainHeader = document.querySelector('.main-header');
+                        var mainSidebar = document.querySelector('.main-sidebar');
+                        if (toggleSwitch)
+                            if (currentTheme) {
+                                if (currentTheme === 'dark') {
+                                    if (!document.body.classList.contains('dark-mode')) {
+                                        document.body.classList.add("dark-mode");
+                                    }
+                                    if (mainHeader.classList.contains('navbar-light')) {
+                                        mainHeader.classList.add('navbar-dark');
+                                        mainHeader.classList.remove('navbar-light');
+                                        mainSidebar.classList.add('sidebar-light-primary');
+                                        mainSidebar.classList.remove('sidebar-dark-primary');
+                                    }
+                                    toggleSwitch.checked = true;
+                                }
+                            }
+
+                        function switchTheme(e) {
+                            if (e.target.checked) {
+                                if (!document.body.classList.contains('dark-mode')) {
+                                    document.body.classList.add("dark-mode");
+                                }
+                                if (mainHeader.classList.contains('navbar-light')) {
+                                    mainHeader.classList.add('navbar-dark');
+                                    mainHeader.classList.remove('navbar-light');
+                                    mainSidebar.classList.add('sidebar-light-primary');
+                                    mainSidebar.classList.remove('sidebar-dark-primary');
+                                }
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                if (document.body.classList.contains('dark-mode')) {
+                                    document.body.classList.remove("dark-mode");
+                                }
+                                if (mainHeader.classList.contains('navbar-dark')) {
+                                    mainHeader.classList.add('navbar-light');
+                                    mainHeader.classList.remove('navbar-dark');
+                                    mainSidebar.classList.add('sidebar-dark-primary');
+                                    mainSidebar.classList.remove('sidebar-light-primary');
+                                }
+                                localStorage.setItem('theme', 'light');
+                            }
+                        }
+
+                        toggleSwitch.addEventListener('change', switchTheme, false);
+                    </script>
+    </body>
+
+    </html>

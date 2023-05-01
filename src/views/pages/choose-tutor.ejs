@@ -1,0 +1,171 @@
+<section class="card">
+    <h5 class="card-header text-center bg-primary text-white">
+        Tìm gia sư
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="d-flex flex-column">
+                <div>
+                    <form action="" method="post" class="container text-center mt-3">
+
+                        <div class="row mt-3">
+                            <div class="col-3">
+                                <label for="city" class="visually-hidden">Tỉnh/Thành phố</label>
+                                <select name="city" id="city" class="form-select" onchange="getDictrict()">
+                                    <option value="">Tỉnh/Thành phố</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label for="district" class="visually-hidden">Quận/Huyện</label>
+                                <select name="district" id="district" class="form-select">
+                                    <option value="">Quận/Huyện</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label for="class" class="visually-hidden">Chọn Lớp học</label>
+                                <select name="class" id="class" class="form-select">
+                                    <option value="">Chọn Lớp học</option>
+                                    <% classes.forEach((classA)=> { %>
+                                        <option value="<%= classA._id %>"><%= classA.className %></option>
+                                        <% })%>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label for="teachingForm" class="visually-hidden">Hình thức học</label>
+                                <select name="teachingForm" id="teachingForm" class="form-select">
+                                    <option value="">Hình thức học</option>
+                                    <% teachingForms.forEach((teachingForm)=> { %>
+                                        <option value="<%= teachingForm._id %>"><%= teachingForm.teachingForm %></option>
+                                        <% })%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label for="subject" class="visually-hidden">Môn học</label>
+                                <select name="subject" id="subject" class="form-select">
+                                    <option value="">Chọn Môn học</option>
+                                    <% subjects.forEach((subject)=> { %>
+                                        <option value="<%= subject._id %>"><%= subject.subject %></option>
+                                        <% })%>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="level" class="visually-hidden">Trình độ</label>
+                                <select name="level" id="level" class="form-select">
+                                    <option value="">Trình độ</option>
+                                    <% tutorQualifications.forEach((tutorQualification)=> { %>
+                                        <option value="<%= tutorQualification._id %>"><%= tutorQualification.level %></option>
+                                        <% })%>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="gender" class="visually-hidden">Giới tính</label>
+                                <select name="gender" id="gender" class="form-select">
+                                    <option value="">Giới tính</option>
+                                    <% genders.forEach((gender)=> { %>
+                                        <option value="<%= gender._id %>"><%= gender.gender %></option>
+                                        <% })%>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="card mt-5">
+    <h5 class="card-header text-center bg-danger text-white">
+        Danh sách gia sư
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="row">
+                <% if(tutors.length == 0){ %>
+                <div class="col text-start">
+                    <div class="text-dark">Danh sách đang trống</div>
+                </div> 
+                <% } else {
+                    tutors.forEach((tutor)=> {
+                %>
+                    <div class="col-4 p-0 mt-4 d-flex justify-content-center" style="cursor: pointer;" onclick="choiseTutor('<%= tutor._id %>')">
+                        <div class="d-flex flex-column text-start border border-1 rounded px-1" style="width:95%">
+                            <div class="d-flex align-items-center">
+                                <img src="<%= tutor.avartar %>"
+                                    alt="<%= tutor.name %>" width="120" height="160">
+                                <div class="d-flex flex-column flex-grow-1 ms-1">
+                                    <span>Tài khoản: <strong><%= tutor.tutor.username %></strong></span>
+                                    <span>Gia sư: <strong><%= tutor.name %></strong></span>
+                                    <span>Năm sinh: <span><%= new Date(tutor.birthday).toLocaleDateString() %></span></span>
+                                    <span>Hiện là: <span><%= tutor.tutorQualification.level %></span></span>
+                                    </span>
+                                    <span>Các chứng chỉ liên quan: <span><%= tutor.anotherCertification %></span></span>
+                                </div>
+                            </div>
+                            <span>
+                                <strong>Hình thức nhận dạy: </strong>
+                                <% tutor.teachingForms.forEach((teachingForm,index)=>{
+                                    if(index != 0){%>
+                                        <%= ", "%>
+                                    <% } %>
+                                        <%= teachingForm.teachingForm%>
+                                <% }) %>
+                            </span>
+                            <span>
+                                <strong>Nhận dạy: </strong>
+                                
+                                <% tutor.classes.forEach((classA,index)=>{
+                                    if(index != 0){%>
+                                        <%= ", "%>
+                                    <% } %>
+                                        <%= classA.className%>
+                                <% }) %>
+                            </span>
+                            <span>
+                                <strong>Các môn: </strong>
+                                
+                                <% tutor.subjects.forEach((subject,index)=>{
+                                    if(index != 0){%>
+                                        <%= ", "%>
+                                    <% } %>
+                                        <%= subject.subject%>
+                                <% }) %>
+                            </span>
+                            <span>
+                                <strong>Khu vực:</strong>
+                                
+                                <%= tutor.address.ward.path %>
+                            </span>
+                            <span>
+                                <strong>Thông tin khác:</strong>&nbsp; <%= tutor.description%>
+                            </span>
+                        </div>
+                    </div>
+                    <% }) 
+                }%>
+                
+            </div>
+            <div class="d-flex justify-content-end mt-5">
+                <nav aria-label="Tutor Pagination">
+                    <ul class="pagination">
+                      <li class="page-item <%= pagination.page == 1 ? " disabled" : "" %>">
+                        <a class="page-link" href="?page=<%= pagination.page - 1 %>" tabindex="-1" aria-disabled="true">Previous</a>
+                      </li>
+                      <% for(let index = 1;  index <= Math.floor(total/9); index++){ %>
+                      <li class="page-item <%= pagination.page == index ? " active" : "" %>" <%= pagination.page == index ? " aria-current=\"page\"" : "" %> >
+                        <a class="page-link" href="?page=<%= index %>"><%= index %></a>
+                      </li>
+                      <% } %>
+                      <li class="page-item <%= pagination.page == Math.floor(total/9) ? "disabled" : "" %>">
+                        <a class="page-link" href="?page=<%= pagination.page + 1 %>">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,23 @@
+<% var title="Trung Tâm Gia Sư" %>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <%- include('./partials/head', {title : title } ) %>
+    </head>
+
+    <body>
+        <main>
+            <%- include('./pages/'+ page ,{title: title,subPage: (typeof subPage !='undefined' ? subPage : 'home' )}) %>
+        </main>
+        <% dialogMessage=typeof dialogMessage !='undefined' ? dialogMessage : undefined; %>
+            <%- include('./partials/dialog', {dialog_message : dialogMessage } ) %>
+
+        <% confirmMessage=typeof confirmMessage !='undefined' ? confirmMessage : undefined; %>
+            <%- include('./partials/confirm-dialog', {confirm_message : confirmMessage } ) %>
+
+                <%- include('./partials/importScript') %>
+
+    </body>
+
+    </html>

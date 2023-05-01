@@ -1,0 +1,100 @@
+<% let menu=[
+{ 
+    title: "Quản lý gia sư", 
+    child: [
+        {
+            title: "Gia sư mới", 
+            child: null,
+            link : "/admin/approving-tutor-management"
+        },
+        {
+            title: "Gia sư", 
+            child: null,
+            link : "/admin/tutor-management"
+        }
+    ],
+    link : "#"
+},
+{ title: "Quản lý học phí", child: null, link: "/admin/tuition-management" },
+{ 
+    title: "Quản lý lớp học", 
+    child: [
+        {
+            title: "Lớp học mới", 
+            child: null,
+            link: "/admin/new-class-management"
+        },
+        {
+            title: "Lớp học đang duyệt",
+            child: null,
+            link: "/admin/class-in-the-process"
+        },
+        {
+            title: "Lớp học",
+            child: null,
+            link : "/admin/class-management" 
+        }
+    ],
+    link : "#"
+},
+{
+    title: "Quản lý tin tức",
+    child: null,
+    link: "/admin/post-management"
+},
+{ title: "Quản lý người dùng", child: null , link: "/admin/user-management" },
+{ title: "Quản lý nhân viên", child: null, link: "/admin/employee-management" },
+{ title: "Thống kê", child: null, link: "/admin/evaluate" },
+];
+    %>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: calc(100% - 256px);">
+        <!-- Brand Logo -->
+        <a href="/admin" class="brand-link py-1 bg-secondary border border-2 border-secondary">
+            <div class="my-1 py-1">
+                <img src="/images/favicon.jpg" alt="Administrator Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Administrator Page</span>
+            </div>
+
+        </a>
+        <div class="py-4 border-1 border-bottom"></div>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                    <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                    <% menu.forEach((element)=>{ %>
+                        <li class="nav-item">
+                            <a href="<%= element.link %>" class="nav-link">
+                                <i class="nav-icon fas fa-chevron-right"></i>
+                                <p>
+                                    <%= element.title %>
+                                        <% if(element.child !=null){ %>
+                                            <i class="right fas fa-angle-left"></i>
+                                            <% } %>
+                                </p>
+                            </a>
+                            <% if(element.child !=null){ %>
+                                <ul class="nav nav-treeview">
+                                    <% element.child.forEach((childElement)=> { %>
+                                        <li class="nav-item">
+                                            <a href="<%= childElement.link %>" class="nav-link">
+                                                <i class="nav-icon fas fa-th-list"></i>
+                                                <p>
+                                                    <%= childElement.title%>
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <% }) %>
+                                </ul>
+                                <% } %>
+                        </li>
+                        <%}) %>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>

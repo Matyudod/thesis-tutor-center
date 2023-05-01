@@ -1,0 +1,48 @@
+<section class="card">
+    <h5 class="card-header text-center bg-primary text-white">
+        Báo cáo hằng ngày
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="d-flex flex-wrap">
+                <% 
+                if(reports.length > 0){
+                reports.forEach((report)=>{ %>
+                    <form action="" method="post" class="card ms-3" style="width: 17.5rem;">
+                        <div class="card-header">
+                            <h5 class="card-title w-100">Đánh giá <%= report.course.code%>-<%= new Date(report.date.toString()).toLocaleDateString()  %> </h5>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <strong>
+                                    Đánh giá
+                                </strong>
+                            </div>
+                            <div class="score mb-3">
+                                <i class="far fa-star" id="star1<%= report._id%>" onclick="checkStart(1,'<%= report._id%>')"></i>
+                                <i class="far fa-star" id="star2<%= report._id%>" onclick="checkStart(2,'<%= report._id%>')"></i>
+                                <i class="far fa-star" id="star3<%= report._id%>" onclick="checkStart(3,'<%= report._id%>')"></i>
+                                <i class="far fa-star" id="star4<%= report._id%>" onclick="checkStart(4,'<%= report._id%>')"></i>
+                                <i class="far fa-star" id="star5<%= report._id%>" onclick="checkStart(5,'<%= report._id%>')"></i>
+                                <input type="checkbox" name="star[]" id="star1Check<%= report._id%>" hidden>
+                                <input type="checkbox" name="star[]" id="star2Check<%= report._id%>" hidden>
+                                <input type="checkbox" name="star[]" id="star3Check<%= report._id%>" hidden>
+                                <input type="checkbox" name="star[]" id="star4Check<%= report._id%>" hidden>
+                                <input type="checkbox" name="star[]" id="star5Check<%= report._id%>" hidden>
+                            </div>
+                            <div class="mb-3">
+                                <label for="reason">Lý do</label>
+                                <textarea name="reason" id="reason" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end">
+                            <button class="btn btn-primary" type="submit" id="btnSubmit<%= report._id%>" type="button" name="id" value="<%= report._id%>" disabled>Đánh giá</button>
+                        </div>
+                    </form>      
+                <% })
+                } else {%>
+                    <div class="text-bold">Bạn đã đánh giá đầy đủ tất cả các buổi học rồi</div>
+                <% }%>
+            </div>
+        </div>
+</section>

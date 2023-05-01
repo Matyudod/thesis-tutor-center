@@ -1,0 +1,59 @@
+<% 
+    userId = typeof userId !='undefined' ? userId : "";
+%>
+<section class="card">
+    <h5 class="card-header text-center bg-primary text-white">
+        <%= typeof header != "undefined" ? header : "Các lớp đã đăng ký"%>
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <table class="w-100 table">
+                <tr>
+                    <th>Mã lớp học</th>
+                    <th>Tên học viên</th>
+                    <th>Tình trạng</th>
+                    <th>Giáo viên nhận</th>
+                    <th>Ngày đăng ký</th>
+                    <th>Chi tiết</th>
+                </tr>
+                <% myClass.forEach(item => {%>
+                <tr>
+                    <td><%= item.code %></td>
+                    <td><%= item.name %></td>
+                    <td><%= item.isCancelled == false ? (item.isApproved == true ? (item.currentTutor != null ? 'Đã được nhận' : "Đang chờ gia sư nhận lớp") : "Đang đợi duyệt") : "Đã bị huỷ" %></td>
+                    <td><%= item.currentTutor?.name ?? "Đang chờ gia sư nhận lớp" %></td>
+                    <td><%= new Date(item.updateAt).toLocaleDateString() %></td>
+                    <td>
+                        <a class="btn btn-primary" href="/class-detail/<%= item._id %>">Chi tiết</a>
+                        <a class="btn btn-secondary" href="/course-documents/<%= item._id %>">Tài liệu môn học</a>
+                        <% if(item.isCancelled == false && item.isApproved == false && item.currentTutor == null){%>
+                            <a class="btn btn-warning" href="/user/course-update/<%= item._id %>">Cập nhật</a>
+                        <% } 
+                        if(item.currentTutor != null && item.currentTutor.tutor._id.toString() == userId.toString()){%>
+                            <a class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#addDocument">Thêm tài liệu</a>
+                            <div class="modal fade" id="addDocument" tabindex="-1" aria-labelledby="addDocumentLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <form method="post"  class="modal-content" enctype="multipart/form-data"> 
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="addDocumentLabel">Thêm tài liệu</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">Chọn tài liệu</label>
+                                            <input class="form-control" type="file" id="formFile" name="formFile" required>
+                                          </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="submit" class="btn btn-primary" name="code" value="<%= item.code%>">Thêm</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        <% } %>
+                    </td>
+                </tr>
+                <% }) %>
+            </table>
+        </div>
+</section>

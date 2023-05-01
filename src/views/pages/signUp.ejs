@@ -1,0 +1,33 @@
+<div class="login-page">
+    <div class="screen-window d-flex justify-content-center align-items-center z-1">
+        <a href="/" class="fa fa-arrow-left btn-back-to-home" title="Trở lại Trang chủ"></a>
+        <div class="rounded shadow-lg p-5 w-25 position-absolute form-container bg-white">
+            <form class="row g-3 d-flex flex-column align-items-center" method="post" action="">
+                <h1 class="h1 text-center">ĐĂNG KÝ</h1>
+                <div class="text-danger"></div>
+                <div>
+                    <label for="username" class="visually-hidden">Tên đăng nhập</label>
+                    <input type="text" class="form-control" id="username" placeholder="Tên đăng nhập" name="username">
+                </div>
+                <div>
+                    <label for="password" class="visually-hidden">Mật khẩu</label>
+                    <input type="password" class="form-control" id="password" placeholder="Mật khẩu" name="password">
+                </div>
+                <div>
+                    <label for="name" class="visually-hidden">Họ tên</label>
+                    <input type="text" class="form-control" id="name" placeholder="Họ tên" name="name">
+                </div>
+                <div>
+                    <label for="email" class="visually-hidden">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                </div>
+                <div class="d-flex justify-content-end">
+                    <a href="/auth/login"><button type="button" class="btn btn-warning mb-3 mx-2">Đăng nhập</button></a>
+                    <button type="submit" class="btn btn-primary mb-3 mx-2">Đăng ký</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="d-flex position-absolute background-container ">
+    </div>
+</div>

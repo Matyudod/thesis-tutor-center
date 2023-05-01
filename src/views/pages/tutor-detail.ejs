@@ -1,0 +1,132 @@
+<div class="admin-page">
+    <div class="vw-100 vh-100 background-core position-relative">
+    </div>
+    <div class="vw-100 vh-100 d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+        <a href="<%= backToPrevious %>" class="fa fa-arrow-left btn-back-to-home text-white"
+            title="Trở lại"></a>
+        <div class="bg-light border border-2 rounded p-5" style="width: 90%; height: 90%; overflow-y: scroll;">
+            <h1 class="title">Chi tiết gia sư</h1>
+            <div class="d-flex justify-content-center align-items-start mt-2">
+                <img src="<%= tutor.avartar %>" class="rounded" alt="<%= tutor.name %>" width="200" height="250">
+                <table>
+                    <tr>
+                        <th colspan="2">Thông tin tài khoản</th>
+                    </tr>
+                    <tr>
+                        <td>Tên tài khoản</td>
+                        <td><%= tutor.tutor.username %></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><%= tutor.tutor.email %></td>
+                    </tr>
+                    <tr>
+                        <td>Ngày đăng ký</td>
+                        <td><%= new Date(tutor.registrationDate).toLocaleDateString() %></td>
+                    </tr>
+                    <tr>
+                        <td>Đã được xét duyệt</td>
+                        <td><%= tutor.isApproved ? "Đã duyệt" : "Đợi duyệt" %></td>
+                    </tr>
+                    <tr>
+                        <td>Hình thức dạy</td>
+                        <td>
+                            <ul>
+                                <% tutor.teachingForms.forEach((element)=>{ %>
+                                <li><%= element.teachingForm %></li>
+                                <% }) %>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th colspan="2">Thông tin cơ bản</th>
+                    </tr>
+                    <tr>
+                        <td>Tên gia sư</td>
+                        <td><%= tutor.name %></td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại</td>
+                        <td><%= tutor.phone %></td>
+                    </tr>
+                    <tr>
+                        <td>Năm sinh</td>
+                        <td><%= new Date(tutor.birthday).toLocaleDateString() %></td>
+                    </tr>
+                    <tr>
+                        <td>Giới tính</td>
+                        <td><%= tutor.gender.gender %></td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ</td>
+                        <td><%= tutor.address.ward.name_with_type %></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th colspan="2">Thông tin chi tiết</th>
+                    </tr>
+                    <tr>
+                        <td>Trình độ hiện tại</td>
+                        <td><%= tutor.tutorQualification.level %></td>
+                    </tr>
+                    <tr>
+                        <td>Bằng cấp khác</td>
+                        <td>
+                            <%= tutor.anotherCertification %>
+                        </td> 
+                    </tr>
+                    <tr>
+                        <td>Điểm đánh giá hằng tháng</td>
+                        <td><%= tutor.score + "/100" %></td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả</td>
+                        <td><%= tutor.description %></td>
+                    </tr>
+                </table>
+            </div>
+            <hr>
+            <div class="row row-cols-3 mt-2">
+                <div class="col-3 border-start border-end">
+                    <h4 class="text-center">Môn dạy</h4>
+                    <div class="row row-cols-3">
+                        <% tutor.subjects.forEach((element)=>{ %>
+                        <div class="col"><%= element.subject %></div>
+                        <% }) %>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <h4 class="text-center">Lớp dạy</h4>
+                    <div class="row row-cols-3">
+                        <% tutor.classes.forEach((element)=>{ %>
+                        <div class="col"><%= element.className %></div>
+                        <% }) %>
+                    </div>
+                </div>
+                <div class="col-6 border-start border-end">
+                    <h4 class="text-center">Lịch dạy</h4>
+                    <div class="row row-cols-5">
+                        <% tutor.schedules.forEach((element)=>{ %>
+                        <div class="col"><%= element.schedule %></div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <style>
+                table{
+                    margin: 0 10px;
+                }
+                td:nth-child(1){
+                    width: 150px;
+                }
+                td:nth-child(2){
+                    width: 200px;
+                }
+            </style>
+        </div>
+    </div>
+</div>

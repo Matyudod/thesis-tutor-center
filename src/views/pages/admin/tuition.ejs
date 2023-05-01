@@ -1,0 +1,195 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header ">
+                        <div class="d-flex justify-content-between">
+                            <h1 class="card-title">
+                                Danh sách học phí
+                            </h1>
+                            <a href="/admin/tuition-management">
+                                <h1 class="fa fa-refresh text-primary"></h1>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="py-2 my-3">
+                            <div id="carouselTuition" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <% keyMap[1].forEach((teachingForm,indexTeachingForm)=>{
+                                        %>
+                                        <div class="carousel-item <%= indexTeachingForm==0? " active" : "" %>">
+                                            <h5 class="text-primary">
+                                                Học phí <%- teachingForm.toLowerCase()%>
+                                            </h5>
+                                            <table
+                                                class="table-warning-custom w-100 table table-bordered border-warning">
+                                                <tbody>
+
+                                                    <% keyMap[3].forEach((grade, indexGrade)=>{
+                                                        %>
+
+                                                        <% if(indexGrade==0){ %>
+                                                            <tr>
+                                                                <th rowspan=" 2" class="font-weight-bold">KHỐI LỚP</th>
+                                                                <% keyMap[2].forEach((dayPerWeekKey)=>{
+                                                                    %>
+
+                                                                    <th class="font-weight-bold"
+                                                                        colspan="<%- keyMap[0].length %>"><%-
+                                                                            dayPerWeekKey %>
+                                                                    </th>
+                                                                    <% }) %>
+                                                            </tr>
+                                                            <tr>
+                                                                <% keyMap[2].forEach((dayPerWeekKey)=>{
+                                                                    %>
+                                                                    <% keyMap[0].forEach((levels)=>{
+                                                                        %>
+                                                                        <th class="font-weight-bold"> Mức <%-
+                                                                                levels.toLowerCase() %>
+                                                                        </th>
+                                                                        <% }) %>
+
+                                                                            <% }) %>
+                                                            </tr>
+
+                                                            <% } %>
+
+                                                                <tr>
+                                                                    <td><%- grade %></td>
+
+                                                                    <% keyMap[2].forEach((dayPerWeek)=>{
+                                                                        %>
+                                                                        <% keyMap[0].forEach((level)=>{
+                                                                            %>
+
+                                                                            <td>
+                                                                                <form action="/admin/tuition/update"
+                                                                                    method="post" class="d-none">
+                                                                                    <input type="text" name="_id"
+                                                                                        value='<%= dataMap[level+"|"+teachingForm+"|"+dayPerWeek+"|"+grade]._id%>''
+                                                                                    hidden>
+                                                                                    <input type="text" name="min"
+                                                                                        value='
+                                                                                        <%=dataMap[level+"|"+teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMin%>'
+                                                                                    onfocus="setValue(this,formatPrice(this.value))"
+                                                                                    onkeyup="setValue(this,formatPrice(this.value));"
+                                                                                    onblur="setValue(this.nextElementSibling,formatPrice(checkMinMax(this.nextElementSibling.value,this.value,1000000000000)))">
+                                                                                    <input type="text" name="max"
+                                                                                        value='<%= dataMap[level+"|"+teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMax%>'
+                                                                                        onfocus="setValue(this,formatPrice(this.value))"
+                                                                                        onkeyup="setValue(this,formatPrice(this.value))"
+                                                                                        onblur="setValue(this.previousElementSibling,formatPrice(checkMinMax(this.previousElementSibling.value,0,this.value)))">
+                                                                                    <button type="submit"
+                                                                                        class="fa-solid fa-pen-to-square"></button>
+                                                                                </form>
+                                                                                <div
+                                                                                    ondblclick='
+                                                                                        this.classList.add("d-none");this.previousElementSibling.classList.remove("d-none");this.previousElementSibling.classList.add("d-block");'>
+                                                                                    <%- formatTuition(dataMap[level+"|"+teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMin)
+                                                                                        + " -> " +
+                                                                                        formatTuition(dataMap[level+"|"
+                                                                                        +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMax)
+                                                                                        %>
+                                                                                </div>
+
+                                                                            </td>
+                                                                            <% }) %>
+
+                                                                                <% }) %>
+
+                                                                </tr>
+                                                                <% }) %>
+
+                                                </tbody>
+                                            </table>
+                                            <div class="py-2 my-3">
+                                            </div>
+                                            <table class="table-danger-custom w-100 table table-bordered border-danger">
+                                                <tbody>
+
+                                                    <% keyMap[3].forEach((grade, indexGrade)=>{
+                                                        %>
+
+                                                        <% if(indexGrade==0){ %>
+                                                            <tr>
+                                                                <th class="font-weight-bold" rowspan="2">KHỐI
+                                                                    LỚP</th>
+                                                                <% keyMap[4].forEach((dayPerWeekKey)=>{
+                                                                    %>
+
+                                                                    <th class="font-weight-bold"
+                                                                        colspan="<%- keyMap[0].length %>"><%-
+                                                                            dayPerWeekKey %>
+                                                                    </th>
+                                                                    <% }) %>
+                                                            </tr>
+                                                            <tr>
+                                                                <% keyMap[4].forEach((dayPerWeekKey)=>{
+                                                                    %>
+                                                                    <% keyMap[0].forEach((levels)=>{
+                                                                        %>
+                                                                        <th class="font-weight-bold"> Mức <%-
+                                                                                levels.toLowerCase() %>
+                                                                        </th>
+                                                                        <% }) %>
+
+                                                                            <% }) %>
+                                                            </tr>
+
+                                                            <% } %>
+
+                                                                <tr>
+                                                                    <td><%- grade %></td>
+
+                                                                    <% keyMap[4].forEach((dayPerWeek)=>{
+                                                                        %>
+
+                                                                        <% keyMap[0].forEach((level)=>{
+                                                                            %>
+                                                                            <td>
+                                                                                <%= formatTuition(dataMap[level+"|"+teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMin)
+                                                                                    + " -> " +
+                                                                                    formatTuition(dataMap[level+"|"
+                                                                                    +teachingForm+"|"+dayPerWeek+"|"+grade].tuitionMax)%>
+                                                                            </td>
+                                                                            <% }) %>
+
+                                                                                <% }) %>
+
+                                                                </tr>
+                                                                <% }) %>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <% }) %>
+
+                                </div>
+                                <button class="carousel-control-prev" type="button" style="width: 10%;"
+                                    data-bs-target="#carouselTuition" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" style="width: 10%;"
+                                    data-bs-target="#carouselTuition" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+</section>

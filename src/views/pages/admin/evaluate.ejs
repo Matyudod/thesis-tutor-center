@@ -1,0 +1,50 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">
+                            Thống kê tháng <%= new Date().toLocaleDateString() %>
+                        </h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row row-cols-2">
+                            <canvas id="chart-1" class="col w-50 h-50"></canvas>
+                            <canvas id="chart-2" class="col w-50 h-50"></canvas>
+                            <div class="col row">
+                                <div class="col">
+                                    <div class="d-flex justify-content-center align-items-center mt-3 position-relative">
+                                        <canvas id="chart-3" class="w-25 h-25"></canvas>
+                                        <div class="fs-3 text-bold ms-3 w-50 text-warning">Số lượng nhân viên</div>
+                                        <div class="position-absolute fs-2 text-bold" style="padding-right: 53%;"><%= admin%></div>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mt-3 position-relative">
+                                        <canvas id="chart-4" class="w-25 h-25"></canvas>
+                                        <div class="fs-3 text-bold ms-3 w-50 text-danger">Số lượng người dùng</div>
+                                        <div class="position-absolute fs-2 text-bold" style="padding-right: 53%;"><%= customer%></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col row">
+                                <div class="col">
+                                    <div class="d-flex justify-content-center align-items-center mt-3 position-relative">
+                                        <canvas id="chart-5" class="w-25 h-25"></canvas>
+                                        <div class="fs-3 text-bold ms-3 w-50 text-primary">Số lượng học viên</div>
+                                        <div class="position-absolute fs-2 text-bold" style="padding-right: 53%;"><%= student%></div>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mt-3 position-relative">
+                                        <canvas id="chart-6" class="w-25 h-25"></canvas>
+                                        <div class="fs-3 text-bold ms-3 w-50 text-success">Số lượng gia sư</div>
+                                        <div class="position-absolute fs-2 text-bold" style="padding-right: 53%;"><%= tutor%></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

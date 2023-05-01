@@ -1,0 +1,46 @@
+<% if(typeof confirm_message !='undefined' ){ %>
+    <div id="<%= typeof confirm_message !='undefined' ? 
+    (confirm_message.type == 'confirm' ? 'successModal' : 'errorModal' ) : "" %>" class="modal fade show"
+        style="display: block;" aria-hidden="true">
+        <div class="modal-dialog modal-confirm shadow-lg rounded">
+            <form action="<%= confirm_message.action %>" method="post"" class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <% if(confirm_message.type=="confirm" ){ %>
+                            <i class="fa-solid fa-check"></i>
+                            <% } else { %>
+                                <i class="fa-solid fa-xmark"></i>
+                                <% } %>
+                    </div>
+                    <h4 class="modal-title w-100 <%= confirm_message.type == 'confirm' ? 'text-success': 'text-danger'
+                        %>">
+                        <% if(confirm_message.type=="confirm" ){ %>
+                            Confirm!
+                            <% } else { %>
+                                Error!
+                                <% } %>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center fs-4">
+                        <%= confirm_message.message %>
+                    </p>
+                    <% if(confirm_message.hasReason){ %>
+                        <div>
+                            <label>Lý do</label>
+                            <textarea name="reason" class="w-100" rows="3" required></textarea>
+                        </div>
+                        
+                    <% } %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" onclick="window.location.href=document.referrer">Huỷ</button>
+
+                    <input type="text" name="id" value="<%= confirm_message.valueId %>" hidden>
+                    <button type="submit" class="btn btn-primary">Đồng ý</button>
+                   
+                </div>
+            </form>
+        </div>
+    </div>
+    <% } %>

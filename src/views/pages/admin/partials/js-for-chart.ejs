@@ -1,0 +1,233 @@
+<script>
+    const MONTHS = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
+    const CHART_COLORS = {
+        red: 'rgb(255, 99, 132)',
+        orange: 'rgb(255, 159, 64)',
+        yellow: 'rgb(255, 205, 86)',
+        green: 'rgb(75, 192, 192)',
+        blue: 'rgb(54, 162, 235)',
+        purple: 'rgb(153, 102, 255)',
+        grey: 'rgb(201, 203, 207)'
+    };
+    const CHART_COLOR_ARRAY = [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)',
+    ];
+    (async function () {
+        async function lineChart(ctx,chartName, datas, color,labels,labelName){
+            const data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: labelName,
+                        data: datas,
+                        borderColor: color,
+                        backgroundColor: color,
+                        borderWidth : 10
+                    }
+                ]
+            };
+            new Chart(
+            ctx,
+            {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels:{
+                                font :{size : 25}
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: chartName,
+                            position: 'bottom',
+                            font: {size : 50}
+                        }
+                    }
+                },
+            }
+        );
+        }
+        async function mupltipleLLineChart(ctx,chartName, multtipleDatas,labels,labelName){
+            let datasets = [];
+            let index = 0;
+            for(let datas of multtipleDatas){
+                datasets.push({
+                        label: labelName,
+                        data: datas,
+                        borderColor: CHART_COLOR_ARRAY[index],
+                        backgroundColor: CHART_COLOR_ARRAY[index]
+                    });
+                    index++;
+            }
+            const data = {
+                labels: labels,
+                datasets: datasets
+            };
+            new Chart(
+            ctx,
+            {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels:{
+                                font :{size : 25}
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: chartName,
+                            position: 'bottom',
+                            font: {size : 50}
+                        }
+                    }
+                },
+            }
+        );
+        }
+        async function doughnutChart(ctx,chartName, datas, color,labels,labelName){
+            const data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: labelName,
+                        data: datas,
+                        borderColor: color,
+                        backgroundColor: color
+                    }
+                ]
+            };
+            new Chart(
+            ctx,
+            {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                            position: 'bottom',
+                            labels:{
+                                font :{size : 25}
+                            }
+                        },
+                        title: {
+                            display: false,
+                            text: chartName,
+                            position: 'bottom',
+                            font: {size : 50}
+                        },
+                        tooltip : {
+                            enabled: false,
+                        }
+                    }
+                },
+            }
+        );
+        }
+        async function chart1(){
+            let today = new Date().getDate();
+            let dataString = "<%= dataForChart1 %>";
+            let datas = JSON.parse(dataString);
+            let ctx = document.getElementById('chart-1');
+            let labels = [];
+            for(let item in datas){
+                if(item != "remove")
+                labels.push(parseInt(item  ?? "0") +1);
+            }
+            let chartName = "Biểu đồ lượng học viên đăng ký\ntừ đầu tháng "+(new Date().getMonth()+1).toString() + " đến nay";
+            let color = CHART_COLORS.blue;
+            let labelName = "Ngày";
+            await lineChart(ctx,chartName, datas, color,labels,labelName)
+        }
+        async function chart2(){
+            let today = new Date().getDate();
+            let dataString = "<%= dataForChart2 %>";
+            let datas = JSON.parse(dataString);
+            let ctx = document.getElementById('chart-2');
+            let labels = [];
+            for(let item in datas){
+                if(item != "remove")
+                labels.push(parseInt(item  ?? "0") +1);
+            }
+            let chartName = "Biểu đồ lượng gia sư đăng ký\ntừ đầu tháng "+(new Date().getMonth()+1).toString() + " đến nay";
+            let color = CHART_COLORS.yellow;
+            let labelName = "Ngày";
+            await lineChart(ctx,chartName, datas, color,labels,labelName)
+        }
+        async function chart3(){
+            let ctx = document.getElementById('chart-3');
+            let color = CHART_COLORS.yellow;
+            let chartName = "";
+            let labelName = "";
+            let labels = [""];
+            let datas = [100];
+            await doughnutChart(ctx,chartName, datas, color,labels,labelName)
+        }
+        async function chart4(){
+            let ctx = document.getElementById('chart-4');
+            let color = CHART_COLORS.red;
+            let chartName = "";
+            let labelName = "";
+            let labels = [""];
+            let datas = [100];
+            await doughnutChart(ctx,chartName, datas, color,labels,labelName)
+        }
+        async function chart5(){
+            let ctx = document.getElementById('chart-5');
+            let color = CHART_COLORS.blue;
+            let chartName = "";
+            let labelName = "";
+            let labels = [""];
+            let datas = [100];
+            await doughnutChart(ctx,chartName, datas, color,labels,labelName)
+        }
+        async function chart6(){
+            let ctx = document.getElementById('chart-6');
+            let color = CHART_COLORS.green;
+            let chartName = "";
+            let labelName = "";
+            let labels = [""];
+            let datas = [100];
+            await doughnutChart(ctx,chartName, datas, color,labels,labelName)
+        }
+        async function initChart(){
+            await chart1();
+            await chart2();
+            await chart3();
+            await chart4();
+            await chart5();
+            await chart6();
+        }
+        await initChart();
+    })();
+</script>

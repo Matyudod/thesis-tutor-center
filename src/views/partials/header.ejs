@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand text-uppercase" href="/">
+            <%= typeof title !='undefined' ? title : 'default' %>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="w-25 pt-3"></div>
+            <form class="d-flex wm-25" role="search">
+                <input autocomplete="off" class="form-control me-2 px-3 flex-grow-1" type="search" name="searchString" onfocus="search.style.display = 'block'" onblur="search.style.display = 'none'" placeholder="Tìm kiếm gia sư" aria-label="Search" onkeyup="searchTutor(this.value)">
+            </form>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Phụ huynh
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Tìm gia sư</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Học phí tham khảo</a></li>
+                        <li><a class="dropdown-item" href="#">Dịch vụ tham khảo</a></li>
+                        <li><a class="dropdown-item" href="#">Gia sư tiêu biểu</a></li>
+                        <li><a class="dropdown-item" href="#">Lưu ý</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Gia sư
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Thông tin tuyển dụng</a></li>
+                        <li><a class="dropdown-item" href="#">Lớp sắp mở</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Mẫu hợp đồng tuyển dụng</a></li>
+                        <li><a class="dropdown-item" href="#">Hướng dẫn</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Tài khoản
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" id="user-control">
+                        <li class="d-flex justify-content-center ">
+                            <img class="rounded-circle m-5 shadow-lg" width="150" height="150"
+                                src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png"
+                                alt="Avatar">
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/auth/login">Đăng nhập</a></li>
+                        <li><a class="dropdown-item" href="/auth/sign-up">Đăng ký</a></li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Cập nhật thông tin</a></li>
+                        <li><a class="dropdown-item" href="#">Các lớp đã nhận</a></li>
+                        <li><a class="dropdown-item" href="#">Các lớp đã đăng ký</a></li>
+                        <li><a class="dropdown-item" href="#">Thay đổi mật khẩu</a></li>
+                        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="position-absolute w-100 d-flex justify-content-between" style="z-index: 5;" id="search">
+    <div style="flex-grow: 5;"></div>
+    <div class="w-25" id="resultOfSearch">
+    </div>
+    <div style="flex-grow: 6;"></div>
+</div>
+<div class="position-absolute w-100 d-flex justify-content-between" style="z-index: 6;" id="process-bar">
+</div>

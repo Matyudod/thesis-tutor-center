@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            Tài liệu môn học
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="w-25 pt-3"></div>
+            <div class="w-25 pt-3"></div>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Tài khoản
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end"  id="user-control">
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="d-flex bg-secondary flex-column py-3 px-5 ">
+    <a href="javascript:window.location.href = document.referrer" class="text-white">
+        <i class="fa-solid fa-angle-left"></i> Trở lại
+    </a>
+</div>
+<div class="d-flex bg-secondary flex-column py-3 px-5 ">
+    <% listDir.forEach((file)=>{ %>
+        <a href="<%= url + file.fileName %>" target="_blank">
+            <div class="d-flex align-items-center fs-4 mb-2" role="button">
+                <% if( file.typeIsFile==false){ %>
+                    <i class="fa-solid fa-folder text-white"></i>
+                    <% } %>
+                        <% if( file.typeIsFile==true){ %>
+                            <i class="fa-solid fa-file text-white"></i>
+                            <% } %>
+                                <div class="ms-2 text-white">
+                                    <%= file.fileName %>
+                                </div>
+
+            </div>
+        </a>
+        <% }); %>
+</div>

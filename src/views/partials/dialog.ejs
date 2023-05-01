@@ -1,0 +1,43 @@
+<% if(typeof dialog_message !='undefined' ){ %>
+    <div id="<%= typeof dialog_message !='undefined' ? 
+    (dialog_message.type == 'success' ? 'successModal' : 'errorModal' ) : "" %>" class="modal fade show"
+        style="display: block;" aria-hidden="true">
+        <div class="modal-dialog modal-confirm shadow-lg rounded">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <% if(dialog_message.type=="success" ){ %>
+                            <i class="fa-solid fa-check"></i>
+                            <% } else { %>
+                                <i class="fa-solid fa-xmark"></i>
+                                <% } %>
+                    </div>
+                    <h4 class="modal-title w-100 <%= dialog_message.type == 'success' ? 'text-success': 'text-danger'
+                        %>">
+                        <% if(dialog_message.type=="success" ){ %>
+                            Success!
+                            <% } else { %>
+                                Error!
+                                <% } %>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center fs-4">
+                        <%= dialog_message.message %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        setTimeout(() => {
+            if (document.getElementById("successModal")) {
+                document.getElementById("successModal").className = "modal fade";
+                setTimeout(() => { document.getElementById("successModal").className += " d-none" }, 100);
+            } else if (document.getElementById("errorModal")) {
+                document.getElementById("errorModal").className = "modal fade d-none";
+                setTimeout(() => { document.getElementById("errorModal").className += " d-none" }, 100);
+            }
+        }, 2200)
+    </script>
+    <% } %>

@@ -1,0 +1,38 @@
+<% let bgColor=["bg-primary","bg-danger","bg-info","bg-warning","bg-success","bg-secondary"] %>
+    <div class="admin-page">
+        <div class="vw-100 vh-100 background-core position-relative">
+        </div>
+        <div class="vw-100 vh-100 d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+            <div class="w-75 row  row-cols-4">
+                <% menu.forEach((menuItem,index)=>{ %>
+                    <div class="col p-2" onclick="window.location.href = '<%= menuItem.link%>'">
+
+                        <div
+                            class="card text-center d-flex justify-content-center align-items-center tab-management position-relative">
+                            <% if(menuItem.notify> 0){ %>
+                                <span
+                                    title="Có thêm <%= menuItem.notify.toString() + " " + menuItem.title.toLowerCase() %>"
+                                    class="position-absolute badge-menu py-1 px-2 fs-5 translate-middle badge rounded-pill
+                            bg-danger">
+                                    <%= menuItem.notify> 99 ? "99+" : menuItem.notify.toString() %>
+                                        <span class="visually-hidden">unread messages</span>
+                                </span>
+                                <% } %>
+                                    <div class="rounded-circle d-flex justify-content-center align-items-center p-3 mt-3 fs-5  
+                        <%= bgColor[index % 5] %> 
+                            border border-1">
+                                        <h1 class="m-1 text-white ">
+                                            <%= menuItem.title.split(" ").map(x => x.charAt(0).toUpperCase()).join("").slice(0,2) %>
+                            </h1>
+                        </div>
+                        <div class=" card-body">
+                                                <h5 class="card-title fs-4 text-bold text-secondary">
+                                                    <%= menuItem.title %>
+                                                </h5>
+                                    </div>
+                        </div>
+                    </div>
+                    <% })%>
+            </div>
+        </div>
+    </div>

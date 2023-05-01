@@ -1,0 +1,278 @@
+<section class="card">
+    <h5 class="card-header text-center bg-primary text-white">
+        <%=  typeof header !='undefined' ? header  : "Đăng ký tìm gia sư" %> 
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="d-flex flex-column">
+                <div>
+                    Quý phụ huynh, học viên đăng ký tìm gia sư tại đây, Nếu cần hỗ trợ vui lòng liên hệ
+                    <strong>0399 3819 555</strong>
+                    để được tư vấn gia sư miễn phí
+                </div>
+                <div>
+                    <form action="" method="post" class="container text-center mt-3">
+
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="name">Họ tên người học (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="name" placeholder="Ví dụ: Nguyễn Văn A"
+                                    name="name" required 
+                                    <% if(typeof course !='undefined'){%>
+                                        value="<%= course.name %>"
+                                    <% }%>>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="maxFee">Học phí có thể chấp nhận (<span
+                                        class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="maxFee"
+                                    placeholder="Tối thiểu 1tr, tối đa 5tr5" name="maxFee"
+                                    onblur="setValue(this, formatPrice(checkMinMax(this.value,900000,5500000)))"
+                                    required 
+                                    <% if(typeof course !='undefined'){%>
+                                        value="<%= course.maxFee %>"
+                                    <% }%>>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="gender">Giới tính (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <select name="gender" id="gender" class="form-select" required>
+                                    <option value="">Giới tính</option>
+                                    <% genders.forEach((gender)=>{ %>
+                                        <option value="<%= gender._id %>"
+                                            <% if(typeof course !='undefined'){%>
+                                                selected="<%= course.gender._id == gender._id ? "selected" : "" %>"
+                                            <% }%>>
+                                            <%= gender.gender %>
+                                        </option>
+                                        <%}); %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="phone">Số điện thoại (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" maxlength="12" required minlength="12" class="form-control"
+                                    id="phone" name="phone" required placeholder="Ví dụ: 033 293 4016"
+                                    onkeyup="setValue(this,formatPhone(this.value))"
+                                    <% if(typeof course !='undefined'){%>
+                                        value="<%= course.phone %>"
+                                    <% }%>>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="teachingForm">Hình thức học (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <select name="teachingForm" id="teachingForm" class="form-select" required>
+                                    <option value="">Hình thức học</option>
+                                    <% teachingForms.forEach((teachingForm)=>{ %>
+                                        <option value="<%= teachingForm._id %>" 
+                                            <% if(typeof course !='undefined'){%>
+                                                selected="<%= course.teachingForm._id == teachingForm._id ? "selected" : "" %>"
+                                            <% }%>>
+                                            <%= teachingForm.teachingForm %>
+                                        </option>
+                                        <%}); %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="subject">Môn học (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <select name="subject" id="subject" class="form-select" required>
+                                    <option value="">Chọn Môn học</option>
+                                    <% subjects.forEach((subject)=>{ %>
+                                        <option value="<%= subject._id %>"
+                                            <% if(typeof course !='undefined'){%>
+                                                selected="<%= course.subject._id == subject._id ? "selected" : "" %>"
+                                            <% }%>>
+                                            <%= subject.subject %>
+                                        </option>
+                                        <%}); %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="expireMonth">Thời gian học (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <select name="expireMonth" id="expireMonth" class="form-select" required>
+                                    <option value="">Thời gian học</option>
+                                    <% for(let month=3 ; month <= 12 ; month += 3){ %>
+                                        <option value="<%= month%>"
+                                            <% if(typeof course !='undefined'){%>
+                                                selected="<%= course.expireMonth == month ? "selected" : "" %>"
+                                            <% }%>> <%= month <  12 ? month + " Tháng" : "1 Năm" %></option>
+                                    <%} %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="address">Địa chỉ (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="address" placeholder="Địa chỉ cụ thể"
+                                    name="address" required
+                                    <% if(typeof course !='undefined'){%>
+                                        value="<%= course.address.address %>"
+                                    <% }%>>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3">
+                            </div>
+                            <div class="col-3">
+                                <select name="city" id="city" class="form-select" onchange="getDictrict()" required>
+                                    <option value="">Tỉnh/Thành phố</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <select name="district" id="district" class="form-select" onchange="getWard()" required>
+                                    <option value="">Quận/Huyện</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <select name="ward" id="ward" class="form-select" required>
+                                    <option value="">Xã/Phường/Thị trấn</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3">
+                            </div>
+                            <div class="col-9 d-flex align-items-center justify-content-end">
+                                <i class="fa-solid fa-arrow-right text-primary fs-4 me-2"></i>
+                                <i class="text-primary fs-5 fw-bold me-2">Chọn gia sư tại đây</i>
+                                <a href="/choose-tutor">
+                                    <button type="button" class="btn btn-primary me-2 px-3 rounded-pill">Đề cử gia
+                                        sư</button>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="class">Lớp muốn đăng ký (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <select name="class" id="class" class="form-select" required>
+                                    <option value="">Chọn Lớp học</option>
+                                    <% classes.forEach((classA)=>{ %>
+                                        <option value="<%= classA._id %>"
+                                            <% if(typeof course !='undefined'){%>
+                                                selected="<%= course.class._id == classA._id ? "selected" : "" %>"
+                                            <% }%>>
+                                            <%= classA.className %>
+                                        </option>
+                                        <%}); %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-2 text-start">
+                                <label for="dayPerWeek">Số buổi/tuần (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-3">
+                                <select name="dayPerWeek" id="dayPerWeek" class="form-select"
+                                    onchange="checkNumberOfChip(event,this,'<%=JSON.stringify(dayPerWeeks)%>')"
+                                    required>
+                                    <option value="">Chọn số buổi/tuần</option>
+                                    <% dayPerWeeks.forEach((dayPerWeek)=>{ %>
+                                        <option value="<%= dayPerWeek._id %>">
+                                            <%= dayPerWeek.dayPerWeek %>
+                                        </option>
+                                        <%}); %>
+                                </select>
+                            </div>
+                            <div class="col-2 text-start">
+                                <label for="schedules">Chọn buổi</label>
+                            </div>
+                            <div class="col-2">
+                                <select id="schedule-detail-session" class="form-select">
+                                    <option value="">Chọn buổi </option>
+                                    <% daySessions.forEach((daySession)=>{ %>
+                                        <option value="<%= daySession._id %>">
+                                            <%= daySession.daySession %>
+                                        </option>
+                                        <%}); %>
+
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select id="schedule-detail-day" class="form-select">
+                                    <option value="">Chọn thứ</option>
+                                    <% dayWeeks.forEach((dayWeek)=>{ %>
+                                        <option value="<%= dayWeek._id %>">
+                                            <%= dayWeek.dayWeek %>
+                                        </option>
+                                        <%}); %>
+
+                                </select>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-primary" type="button" onclick="generateChip()">
+                                    Thêm
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mt-3 chip-container">
+                            <div class="col-2 text-start">
+                                <label for="requirement">Buổi đã chọn</label>
+                            </div>
+                            <% if(typeof course !='undefined'){
+                                course.schedules.forEach((schedule)=>{
+                            %>
+                            <div class="col-2 chip-box">
+                                <div class="rounded-pill bg-primary shadow text-white px-2" title="Nhấn để xoá" role="button" onclick="removeChip(this)">
+                                    <%= schedule.schedule %>
+                                </div>
+                                <input type="checkbox" value="<%= schedule._id %>" name="schedules[]" hidden checked="checked">
+                            </div>
+                            <% })} %>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="requirement">Yêu cầu</label>
+                            </div>
+                            <div class="col-9">
+                                <textarea class="form-control" placeholder="Ví dụ: Sinh viên Sư phạm, Nữ"
+                                    id="requirement" name="requirement" rows="4"><% if(typeof course !='undefined'){%><%- course.requirement.trim() %><% }%></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col text-start">
+                                <div>Danh sách gia sư đề cử (Tối đa 3 người)</div>
+                            </div>
+                        </div>
+                        <div class="row mt-3" id="listChosenTutor">
+                            
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">Gửi yêu cầu</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,329 @@
+<section class="card">
+    <h5 class="card-header text-center bg-primary text-white">
+        <%=  typeof header !='undefined' ? header  : "Biểu mẩu đăng ký làm gia sư" %> 
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="d-flex flex-column">
+                <div>
+                    <form action="" enctype="multipart/form-data" method="post" class="container text-center mt-3">
+
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="name">Họ tên gia sư (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="name" placeholder="Ví dụ: Nguyễn Văn A"
+                                    name="name" required 
+                                    <% if(typeof tutor !='undefined'){%>
+                                        value="<%= tutor.name %>"
+                                    <% }%>>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="phone">Số điện thoại (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" maxlength="12" required minlength="12" class="form-control"
+                                    id="phone" name="phone" placeholder="Ví dụ: 033 293 4016"
+                                    <% if(typeof tutor !='undefined'){%>
+                                        value="<%= tutor.phone %>"
+                                    <% }%>
+                                    onkeyup="setValue(this,formatPhone(this.value))">
+                            </div>
+                        </div>
+
+                        <div class="row mt-3 d-flex align-items-center">
+                            <div class="col-3 text-start">
+                                <label for="birthday">Ngày sinh (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="date" required class="form-control" name="birthday"
+                                <% if(typeof tutor !='undefined'){%>
+                                    value="<%= tutor.birthday.toISOString().split("T")[0] %>"
+                                <% }%>
+                                >
+                            </div>
+                            <div class="col-3 text-start">
+                                <label for="gender">Giới tính (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-3">
+                                <select name="gender" id="gender" class="form-select" required>
+                                    <option value="">Chọn giới tính</option>
+                                    <% genders.forEach((gender)=>{ %>
+                                        <option value="<%= gender._id%>"
+                                            <% if(typeof tutor !='undefined'){%>
+                                                selected="<%= tutor.gender._id == gender._id ? "selected" : "" %>"
+                                            <% }%>
+                                            >
+                                            <%= gender.gender%>
+                                        </option>
+                                        <%}) %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="teachingForm">Hình thức dạy (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <% teachingForms.forEach((teachingForm)=>{%>
+                                <div class="col-3 text-start">
+                                    <input type="checkbox" class="form-check-input" value="<%= teachingForm._id %>"
+                                        name="teachingForms[]" id="studyTypes_1"
+                                        <% if(typeof tutor !='undefined'){%>
+                                            <%= tutor.teachingForms.map(x => x._id.toString()).indexOf(teachingForm._id.toString()) > -1 ? "checked" : "" %>
+                                        <% }%>>
+                                    <label class="form-check-label" for="studyTypes_1">
+                                        <%= teachingForm.teachingForm %>
+                                    </label>
+                                </div>
+                                <% }) %>
+
+                                    <div class="col-3">
+                                    </div>
+                        </div>
+                        <% if(typeof header =='undefined'){ %>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="tutorQualification">Trình độ học vấn (<span
+                                        class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+                                <select name="tutorQualification" id="tutorQualification" class="form-select" required>
+                                    <option value="">Trình độ (<span class="text-danger">*</span>)</option>
+                                    <% tutorQualifications.forEach((tutorQualification)=>{ %>
+                                        <option value="<%= tutorQualification._id%>"
+                                            <% if(typeof tutor !='undefined'){%>
+                                                selected="<%= tutor.tutorQualification._id == tutorQualification._id ? "selected" : "" %>"
+                                            <% }%>>
+                                            <%= tutorQualification.level%>
+                                        </option>
+                                        <%}) %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <% } %>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="anotherCertification">Bằng Cấp Khác </label>
+                            </div>
+                            <div class="col-9">
+                                <input name="anotherCertification" class="form-control" id="anotherCertification"
+                                    placeholder="Ví dụ: Chứng chỉ Toeic 950" 
+                                    <% if(typeof tutor !='undefined'){%>
+                                        value="<%= tutor.anotherCertification %>"
+                                    <% }%>/>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="address">Khu vực dạy trực tiếp (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-3">
+                                <select name="city" id="city" class="form-select" onchange="getDictrict()" required>
+                                    <option value="">Tỉnh/Thành phố (<span class="text-danger">*</span>)</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <select name="district" id="district" class="form-select" onchange="getWard()" required>
+                                    <option value="">Quận/Huyện (<span class="text-danger">*</span>)</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <select name="ward" id="ward" class="form-select">
+                                    <option value="">Xã/Phường/Thị trấn</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="CV">Tải ảnh CV lên (<span class="text-danger">*</span>)
+                                    <br>
+                                    (Tối đa 1 ảnh)
+                                </label>
+                            </div>
+                            <div class="col-9 text-start d-flex align-items-center">
+                                <button type="button" class="btn btn-primary"
+                                    onclick="document.querySelector('#CV').click()">Tải ảnh CV lên</button>
+                                <input type="file" class="form-control" name='CV' id="CV" accept="image/*"
+                                    onchange="setDataFileData(this.id,this,'Ảnh CV')" hidden required>
+                                <div class="text-danger ms-2" id="CV-message-error">Ảnh CV không thể để trống</div>
+                                <div class="text-success ms-2" id="CV-message-success"></div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="image">Tải ảnh thẻ lên (<span class="text-danger">*</span>)
+                                    <br>
+                                    (Tối đa 1 ảnh)
+                                </label>
+                            </div>
+                            <div class="col-9 text-start d-flex align-items-center">
+                                <button type="button" class="btn btn-primary"
+                                    onclick="document.querySelector('#image').click()">Tải ảnh thẻ lên</button>
+                                <input type="file" class="form-control" name='image' id="image" accept="image/*"
+                                    onchange="setDataFileData(this.id,this,'Ảnh thẻ')" hidden required>
+                                <div class="text-danger ms-2" id="image-message-error">Ảnh thẻ không thể để
+                                    trống</div>
+                                <div class="text-success ms-2" id="image-message-success"></div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="identityImage">Tải ảnh CMND/CCCD lên (<span class="text-danger">*</span>)
+                                    <br>
+                                    (Ảnh 2 mặt)
+                                </label>
+                            </div>
+                            <div class="col-9 text-start d-flex align-items-center">
+                                <button type="button" class="btn btn-primary"
+                                    onclick="document.querySelector('#identityImage').click()">Tải ảnh CMND/CCCD
+                                    lên</button>
+                                <input type="file" class="form-control" id="identityImage" accept="image/*" required
+                                    onchange="setDataFilesData(this.id,this,'Ảnh CMND/CCCD',2)" name='identityImages'
+                                    hidden multiple>
+                                <div class="text-danger ms-2" id="identityImage-message-error">
+                                    Ảnh CMND/CCCD không thể để trống
+                                </div>
+                                <div class="text-success ms-2" id="identityImage-message-success"></div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="degrees">Tải ảnh bằng cấp lên
+                                    <br>
+                                    (Tối đa 4 ảnh)
+                                </label>
+                            </div>
+                            <div class="col-9 text-start d-flex align-items-center">
+                                <button type="button" class="btn btn-primary"
+                                    onclick="document.querySelector('#degrees').click()">
+                                    Tải ảnh bằng cấp lên
+                                </button>
+                                <input type="file" class="form-control" id="degrees" accept="image/*" name='degrees'
+                                    onchange="setDataFilesData(this.id,this,'Ảnh bằng cấp',4)" hidden multiple>
+                                <div class="text-danger ms-2" id="degrees-message-error">
+
+                                </div>
+                                <div class="text-success ms-2" id="degrees-message-success"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                            </div>
+                            <div class="col-9 text-start d-flex align-items-center">
+                                Ảnh bằng cấp có thể là thẻ sinh viên, bằng tốt nghiệp, các văn bằng chứng chỉ được công
+                                nhận,... <br>
+                                (Tối đa không vượt quá 4 ảnh)
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="subject">Môn học (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+
+                            </div>
+                        </div>
+                        <div class="row mt-3 text-start row-cols-4">
+                            <% subjects.forEach((subject)=>{%>
+                                <div class="col d-flex align-items-center">
+                                    <input type="checkbox" name="subjects[]" value="<%= subject._id%>" 
+                                    <% if(typeof tutor !='undefined'){%>
+                                        <%= tutor.subjects.map(x => x._id.toString()).indexOf(subject._id.toString()) > -1 ? "checked" : "" %>
+                                    <% }%>>
+                                    <label class="ms-2">
+                                        <%= subject.subject%>
+                                    </label>
+                                </div>
+                                <% }) %>
+
+
+                        </div>
+                        <hr>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="class">Dạy lớp (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+
+                            </div>
+                        </div>
+                        <div class="row mt-3 text-start row-cols-4">
+                            <% classes.forEach((classA)=>{%>
+                                <div class="col d-flex align-items-center">
+                                    <input type="checkbox" name="classes[]" value="<%= classA._id%>"
+                                    <% if(typeof tutor !='undefined'){%>
+                                        <%= tutor.classes.map(x => x._id.toString()).indexOf(classA._id.toString()) > -1 ? "checked" : "" %>
+                                    <% }%>>
+                                    <label class="ms-2">
+                                        <%= classA.className%>
+                                    </label>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <hr>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="class">Buổi dạy (<span class="text-danger">*</span>)</label>
+                            </div>
+                            <div class="col-9">
+
+                            </div>
+                        </div>
+                        <div class="row mt-3 text-start row-cols-4">
+
+                            <% schedules.forEach((schedule)=>{%>
+                                <div class="col d-flex align-items-center">
+                                    <input type="checkbox" name="schedules[]" value="<%= schedule._id%>"
+                                    <% if(typeof tutor !='undefined'){%>
+                                        <%= tutor.schedules.map(x => x._id.toString()).indexOf(schedule._id.toString()) > -1 ? "checked" : "" %>
+                                    <% }%>>
+                                    <label class="ms-2">
+                                        <%= schedule.schedule%>
+                                    </label>
+                                </div>
+                                <% }) %>
+
+                        </div>
+
+                        <hr>
+                        <div class="row mt-3">
+                            <div class="col-3 text-start">
+                                <label for="description">Ưu điểm</label>
+                            </div>
+                            <div class="col-9">
+                                <textarea class="form-control"
+                                    placeholder="Nơi để bạn ghi thêm thông tin chi tiết về bản thân. Kinh nghiệm và thành tích bạn đạt được trong quá trình học tập và dạy kèm."
+                                    id=" description" name="description" rows="4">
+                                    <% if(typeof tutor !='undefined'){%>
+                                        <%= tutor.description%>
+                                    <% }%>
+                                </textarea>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row mt-3">
+                            <div class="col d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">Gửi yêu cầu</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

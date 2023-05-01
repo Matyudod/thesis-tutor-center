@@ -1,0 +1,65 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">
+                            <%= header %>
+                        </h1>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table-allow-pagination border table table-striped table-hover">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th>Mã lớp</th>
+                                    <th>Tên học viên</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ</th>
+                                    <th class="non-orderable non-searchable">Quản lý</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% newClassList.forEach((newClass)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= newClass.code%>
+                                        </td>
+                                        <td>
+                                            <%= newClass.name%>
+                                        </td>
+                                        <td>
+                                            <%= newClass.phone%>
+                                        </td>
+                                        <td>
+                                            <%= newClass.address.address + ", " +newClass.address.ward.path_with_type%>
+                                        </td>
+                                        <td class="d-flex justify-content-around">
+                                            <a href="/admin/class-detail/<%= newClass._id  %>" >
+                                                <button class="btn btn-warning">Chi tiết</button>
+                                            </a>
+                                            <% if(newClass.currentTutor != null){%>
+                                                <a class="btn btn-secondary" href="/admin/course-documents/<%= item._id %>">Tài liệu môn học</a>
+                                            <% }%>
+                                            <a href="/admin/class-detail/<%= newClass._id  %>/cancel" >
+                                                <button type="submit" class="btn btn-danger">Xoá</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

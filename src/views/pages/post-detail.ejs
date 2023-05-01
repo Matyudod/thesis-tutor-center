@@ -1,0 +1,15 @@
+<section class="card">
+    <h5 class="card-header text-center bg-primary text-white">
+        <%= post.title %>
+    </h5>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="d-flex flex-column">
+                <h1><%= post.title %></h1>
+                <div class="d-flex justify-content-end">
+                    <div>Được tạo  bởi: <i class="text-bold"><%= post.admin.name %> (<%= new Date(post.updateAt).toLocaleDateString() %>)</i></div>
+                </div>
+                <%- post.content %>
+            </div>
+        </div>
+</section>

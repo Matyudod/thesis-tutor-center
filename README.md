@@ -18,7 +18,7 @@ Now, we can start this project with command:
 
 Start Rasa:
 
-    rasa run --enable-api --cors "*"
+    npm run chat-bot
 Start Server:
 
     npm start

@@ -81,7 +81,7 @@ class AuthController {
             let validationResponse = v.validate(user, scheme.login);
             if (validationResponse !== true) {
                 return res.render("index", {
-                    page: "login",
+                    page: "login-admin",
                     dialogMessage: message.errorFieldIsNull,
                 });
             } else {
@@ -96,6 +96,7 @@ class AuthController {
                     };
                     if (result.isAdmin) {
                         cookies.setSignedCookie(constants.access_token, jwt.generate(userInfo), 600);
+                        cookies.setSignedCookie(constants.is_desktop_app, "true", 100000);
                         cookies.setCookie(
                             constants.has_message,
                             JSON.stringify(customMessage("Đăng nhập", message.successComplete)),
@@ -110,13 +111,13 @@ class AuthController {
                     }
                 } else {
                     return res.render("index", {
-                        page: "login",
+                        page: "login-admin",
                         error_message:"Sai tên đăng nhập hoặc password. Vui lòng kiểm tra lại!"
                     });
                 }
             }
         } catch (err) {
-            return res.render("index", { page: "login", dialogMessage: message.APIErrorServer });
+            return res.render("index", { page: "login-admin", dialogMessage: message.APIErrorServer });
         }
     }
 
@@ -175,7 +176,11 @@ class AuthController {
             JSON.stringify(customMessage("Đăng xuất", message.successComplete)),
             1
         );
-        res.redirect("/");
+        if(cookies.getCookie(constants.is_desktop_app) != undefined){
+            res.redirect("/auth/loginAdmin")
+        } else {
+            res.redirect("/");
+        }
     }
 }
 module.exports = { AuthController };

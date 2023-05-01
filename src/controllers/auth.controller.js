@@ -176,7 +176,7 @@ class AuthController {
             JSON.stringify(customMessage("Đăng xuất", message.successComplete)),
             1
         );
-        if(cookies.getCookie(constants.is_desktop_app) != undefined){
+        if(cookies.getSignedCookie(constants.is_desktop_app) != undefined){
             res.redirect("/auth/loginAdmin")
         } else {
             res.redirect("/");

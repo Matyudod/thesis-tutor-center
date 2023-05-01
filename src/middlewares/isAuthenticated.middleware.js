@@ -42,6 +42,7 @@ class Middleware {
     async isNotAdminAuthenticated(req, res, next) {
         let userService = new UserService();
         let cookies = new CookieProvider(req, res);
+        cookies.setSignedCookie(constants.is_desktop_app, "true", 100000);
         if (cookies.getSignedCookie(constants.access_token) == undefined) {
             next();
         } else {

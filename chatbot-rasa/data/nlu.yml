@@ -1,0 +1,295 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hey
+      - chào
+      - hi
+      - xin chào
+      - chào bạn
+      - hello
+      - hey
+      - mình có vài câu hỏi
+      - có ai giúp mình không
+      - bạn ơi
+      - anh ơi
+      - chị ơi
+      - cháu ơi
+      - em gì ơi
+      - chào 
+      - có ai ở đây không?
+  - intent: goodbye
+    examples: |
+      - tạm biệt
+      - chào tạm biệt
+      - chào tạm biệt em
+      - tạm biệt em
+      - tạm biệt em nhé
+      - hẹn gặp lại bạn
+      - hẹn gặp lại sau
+      - hẹn gặp lại
+      - bái bai
+  - intent: affirm
+    examples: |
+      - Vâng
+      - thật
+      - tất nhiên rồi
+      - nghe hay đấy
+      - Chính xác
+      - dạ
+      - ô kê
+      - ừ
+  - intent: need_cheer_up
+    examples: |
+      - Tôi mệt quá
+      - Tôi muốn bỏ cuộc
+      - Tôi áp lực quá
+  - intent: deny
+    examples: |
+      - không
+      - không bao giờ
+      - tôi không nghĩ vậy
+      - không thích điều đó
+      - Không đời nào
+      - không hẳn vậy
+      - không thể nào
+  - intent: mood_great
+    examples: |
+      - hoàn hảo
+      - Tuyệt
+      - kinh ngạc
+      - cảm giác như một vị vua
+      - Tuyệt vời
+      - Tôi đang cảm thấy rất tốt
+      - tôi rất tuyệt
+      - Tôi tuyệt vời
+      - Tôi sẽ cứu thế giới
+      - cực kỳ tốt
+      - quá hoàn hảo
+      - tốt quá
+      - rất hoàn hảo
+      - Rất ngon
+      - Rất tốt
+      - Cực kì tốt
+  - intent: mood_unhappy
+    examples: |
+      - ngày của tôi thật kinh khủng
+      - Tôi buồn
+      - Tôi cảm thấy cách phục vụ không được tốt
+      - Tôi thất vọng về nhà hàng
+      - siêu buồn
+      - Tôi rất buồn về thái độ của nhân viên
+      - buồn
+      - rất buồn
+      - không vui
+      - không tốt
+      - cách phục vụ không tốt lắm
+      - buồn vô cùng
+      - buồn quá
+      - tệ
+      - quá tệ
+      - thật tồi tệ
+      - Không hài lòng với thái độ của nhân viên
+      - Không tôn trọng khách hàng
+      - phục vụ không tốt
+  - intent: bot_challenge
+    examples: |
+      - bạn là robot?
+      - Bạn có phải là con người?
+      - tôi đang nói chuyện với một con bot?
+      - Tôi đang nói chuyện với một con người?
+  - intent: ask_thank
+    examples: |
+      - thanks
+      - cám ơn chị(anh)
+      - ok
+      - cảm ơn em
+      - cảm ơn em nhiều nhé
+      - cảm ơn rất nhiều
+      - cám ơn
+  - intent: ask_name
+    examples: |
+      - bạn tên gì
+      - tên gì
+      - chị tên gì
+      - anh tên gì
+      - tên của bạn là gì
+      - tên của chị là gì
+      - tên của anh là gì
+      - cho mình hỏi tên nhé
+      - mình muốn biết tên bạn
+      - mình muốn tiện xưng hộ hơn, cho mình biết tên nhé
+      - để tiện xưng hộ thì tên bạn là gì
+      - cho em xin tên của anh ạ
+      - cho em xin tên của chị ạ
+      - được biết tên bạn thì tốt nhỉ
+      - vui lòng cho mình biết tên nhé
+      - xin phép hỏi tên của bạn
+      - vậy thì tên bạn là gì
+      - tên bạn trong tiếng việt là gì
+      - bạn có vui lòng cho mình biết tên được không
+      - chúng ta nên biết tên nhau nhỉ?
+      - em tên là gì thế
+      - tên em là gì
+      - tên em 
+      - tên bạn 
+      - bạn tên là gì 
+      - bạn tên gì thế
+      - em tên gì
+  - intent: ask_price
+    examples: |
+      - tôi có thể xem học phí của bên mình không
+      - học phí của bên mình không
+      - bảng giá học phí của bên mình không
+      - bảng giá
+      - xem học phí
+  - intent: ask_registTutor
+    examples: |
+      - làm sao để đăng ký làm gia sư vậy
+      - đăng ký làm gia sư thế nào
+      - đăng ký làm gia sư
+      - cách đăng ký làm gia sư
+      - cách để làm gia sư
+      - cách để trở thành gia sư
+  - intent: ask_registCourse
+    examples: |
+      - làm sao để đăng ký khoá học vậy
+      - đăng ký khoá học thế nào
+      - đăng ký khoá học
+      - cách đăng ký khoá học
+      - cách để khoá học
+  - intent: ask_courseDetail
+    examples: |
+      - chi tiết của khoá học [MS01234]{"entity": "courseId"} thế nào
+      - chi tiết của khoá học [MS00323]{"entity": "courseId"} ra sao
+      - chi tiết của khoá học [MS0342]{"entity": "courseId"}
+      - khoá học [MS00233]{"entity": "courseId"} ra sao
+      - khoá học [MS0034]{"entity": "courseId"} 
+      - chi tiết khoá học [MS002343]{"entity": "courseId"} 
+      - chi tiết khoá học [MS01214]{"entity": "courseId"} thế nào
+      - chi tiết khoá học [MS0123]{"entity": "courseId"} ra sao
+      - chi tiết của khoá học [04]{"entity": "courseId"}
+      - chi tiết của khoá học [994]{"entity": "courseId"}
+      - chi tiết của khoá học [589]{"entity": "courseId"}
+      - chi tiết của khoá học [04]{"entity": "courseId"}
+      - chi tiết của khoá học [056]{"entity": "courseId"}
+      - chi tiết của khoá học [07]{"entity": "courseId"}
+  - intent: ask_tutorDetail
+    examples: |
+      - biết cô [Nguyễn Thị Thảo]{"entity": "tutorName"} không
+      - bạn có biết cô [Nguyễn Thị Linh]{"entity": "tutorName"} không
+      - biết thầy [Nguyễn Thị Linh]{"entity": "tutorName"} không
+      - bạn có biết cô [Đào Ngọc Trúc]{"entity": "tutorName"} không
+      - bạn có biết cô [Ngọc Trúc]{"entity": "tutorName"} không
+      - bạn có biết cô [Ngọc]{"entity": "tutorName"} không
+      - bạn có biết cô [Đào]{"entity": "tutorName"} không
+      - bạn có biết cô [Ngọc Hương]{"entity": "tutorName"} không
+      - bạn có biết cô [Nguyễn Diệu Hiền]{"entity": "tutorName"} không
+      - bạn có biết cô [Mỹ Nhân]{"entity": "tutorName"} không
+      - bạn có biết cô [Tiết Thanh]{"entity": "tutorName"} không
+      - bạn có biết cô [Ngọc Nhung]{"entity": "tutorName"} không
+      - bạn có biết cô [Hồng Hạnh]{"entity": "tutorName"} không
+      - bạn có biết cô [Phạm Thị Hồng Hạnh]{"entity": "tutorName"} không
+      - bạn có biết cô [Phạm Trần Minh Nghi]{"entity": "tutorName"} không
+      - bạn có biết cô [Phạm Ngọc Nghi]{"entity": "tutorName"} không
+      - bạn có biết cô [Trần Hiêu Thương]{"entity": "tutorName"} không
+      - bạn có biết cô [Võ Thị Trúc]{"entity": "tutorName"} không
+      - bạn có biết cô [Lê Nguyễn Trúc Huỳnh]{"entity": "tutorName"} không
+      - bạn có biết cô [Phạm Nguyễn Minh Anh]{"entity": "tutorName"} không
+      - bạn có biết thầy [Nguyễn Hữu Lễ]{"entity": "tutorName"} không
+      - bạn có biết thầy [Tùng]{"entity": "tutorName"} không
+      - bạn có biết thầy [Khang]{"entity": "tutorName"} không
+      - bạn có biết thầy [Minh]{"entity": "tutorName"} không
+      - bạn có biết thầy [Huy]{"entity": "tutorName"} không
+      - bạn có biết thầy [Quốc Khánh]{"entity": "tutorName"} không
+      - bạn có biết thầy [Trung]{"entity": "tutorName"} không
+      - bạn có biết thầy [Nguyễn Minh Hiếu]{"entity": "tutorName"} không
+      - bạn có biết thầy [Đức]{"entity": "tutorName"} không
+      - bạn có biết thầy [Hảo]{"entity": "tutorName"} không
+      - bạn có biết thầy [Minh Đức]{"entity": "tutorName"} không
+      - chi tiết của gia sư [Nguyễn Ngọc Ngạn]{"entity": "tutorName"} thế nào
+      - chi tiết của gia sư [Nguyễn Thị Thảo Linh]{"entity": "tutorName"} ra sao
+      - chi tiết của gia sư [Trịnh Ngọc Trúc]{"entity": "tutorName"}
+  - intent: ask_listMyCourse
+    examples: |
+      - có cách nào xem danh sách khoá học của tôi không
+      - xem danh sách khoá học của tôi
+      - làm sao xem danh sách khoá học của tôi không
+      - danh sách khoá học của tôi
+      - khoá học của tôi
+  - intent: ask_freeOfCourse
+    examples: |
+      - giá của khoá học [MS0124]{"entity": "courseId"} bao nhiêu
+      - khoá học [MS01254]{"entity": "courseId"} bao nhiêu
+      - giá của khoá học [MS01364]{"entity": "courseId"}
+      - giá của khoá học [04]{"entity": "courseId"}
+      - giá của khoá học [994]{"entity": "courseId"}
+      - giá của khoá học [589]{"entity": "courseId"}
+      - giá của khoá học [04]{"entity": "courseId"}
+      - giá của khoá học [056]{"entity": "courseId"}
+      - giá của khoá học [07]{"entity": "courseId"}
+      - học phí của khoá học [MS01224]{"entity": "courseId"} bao nhiêu
+      - học phí của khoá học [MS0114]{"entity": "courseId"}
+  - intent: ask_freeOfTutor
+    examples: |
+      - giá của gia sư [Nguyễn Thị Thảo Linh]{"entity": "tutorName"} bao nhiêu
+      - giá của cô [Nguyễn Thảo Linh]{"entity": "tutorName"} bao nhiêu
+      - học phí của cô [Đào Ngọc Trúc]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Ngọc Trúc]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Ngọc]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Đào]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Ngọc Hương]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Anh Thư]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Nguyễn Diệu Hiền]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Mỹ Nhân]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Tiết Thanh]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Ngọc Nhung]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Hồng Hạnh]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Phạm Thị Hồng Hạnh]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Phạm Trần Minh Nghi]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Nguyễn Thị Kim Ngân]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Phạm Ngọc Nghi]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Trần Hiêu Thương]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Võ Thị Trúc]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Lê Nguyễn Trúc Huỳnh]{"entity": "tutorName"} là bao nhiêu
+      - học phí của cô [Phạm Nguyễn Minh Anh]{"entity": "tutorName"} là bao nhiêu
+      - gia sư [Nguyễn Thị Thảo Linh]{"entity": "tutorName"} bao nhiêu
+      - gia sư [Nguyễn Thị Thảo Linh]{"entity": "tutorName"} có mức phí bao nhiêu
+      - thuê gia sư [Nguyễn Thị Linh]{"entity": "tutorName"} tốn bao nhiêu
+      - thuê gia sư [Phạm Thị Thảo]{"entity": "tutorName"} mất bao nhiêu
+      - học phí của thầy [Tùng]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Khang]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Minh]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Huy]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Quốc Khánh]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Trung]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Nguyễn Minh Hiếu]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Trương Tấn Trung]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Huỳnh Ngọc Lưu]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Lê Ngọc Huỳnh]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Lê Hoàng Đức Thái]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Phan Hoàng Thái]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Lê Hoàng Minh Nhật]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Huỳnh Tấn Phát]{"entity": "tutorName"} bao nhiêu
+      - học phí của thầy [Đức]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Hảo]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Hữu Tín]{"entity": "tutorName"} là bao nhiêu
+      - học phí của thầy [Minh Đức]{"entity": "tutorName"} là bao nhiêu
+      - giá của gia sư [Nguyễn Thảo Linh]{"entity": "tutorName"}
+      - học phí của gia sư [Phạm Thị Linh]{"entity": "tutorName"}
+      - học phí của cô [Nguyễn Thị Linh]{"entity": "tutorName"}
+      - học phí của thầy [Nguyễn Linh]{"entity": "tutorName"}
+      - xem thông tin học phí của thầy [Nguyễn Linh]{"entity": "tutorName"}
+  - intent: ask_address
+    examples: |
+      - nhà hàng mình địa chỉ ở đâu
+      - địa chỉ ở đâu
+      - nhà hàng mở ở đâu
+      - bán ở đâu
+      - địa chỉ
+      - cho mình xin địa chỉ của nhà hàng
+      - ở đâu
+      - xin chỗ bán
+      - nhà hàng ở đâu
+      - địa chỉ nhà hàng

@@ -1,0 +1,275 @@
+version: "3.1"
+
+stories:
+
+  - story: asdasd
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: asdadads
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: need_cheer_up
+      - action: utter_cheer_up
+
+  - story: dasdasdsasd
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_name
+      - action: utter_iamabot
+      - intent: ask_price
+      - action: utter_price
+      - intent: ask_freeOfCourse
+      - action: utter_freeOfCourse
+      - intent: ask_address
+      - action: utter_address
+      - intent: ask_thank
+      - action: utter_goodbye
+
+  - story: asdasdasd
+    steps:
+      - intent: ask_freeOfCourse
+      - action: utter_freeOfCourse
+      - intent: ask_thank
+      - action: utter_thank
+
+  - story: aaasdasdasd
+    steps:
+      - intent: ask_freeOfTutor
+      - action: utter_freeOfTutor
+      - intent: ask_thank
+      - action: utter_thank
+
+  - story: asdasdasd
+    steps:
+      - intent: ask_address
+      - action: utter_address
+      - intent: ask_thank
+      - action: utter_thank
+
+  - story: asdasdasd
+    steps:
+      - intent: ask_listMyCourse
+      - action: utter_listMyCourse
+      - intent: ask_thank
+      - action: utter_thank
+
+  - story: asdasdasdasd
+    steps:
+      - intent: ask_tutorDetail
+      - action: utter_tutorDetail
+      - intent: ask_thank
+      - action: utter_thank
+
+  - story: asdasdasd
+    steps:
+      - intent: ask_courseDetail
+      - action: utter_courseDetail
+      - intent: ask_thank
+      - action: utter_thank
+
+  - story: asdasdasd
+    steps:
+      - intent: ask_price
+      - action: utter_price
+      - intent: ask_thank
+      - action: utter_thank
+
+  - story: asdasd
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_tutorDetail
+      - action: utter_tutorDetail
+      - intent: ask_thank
+      - action: utter_thank
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: asdasdasdd
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_freeOfCourse
+      - action: utter_freeOfCourse
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: ddddddddddd
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_address
+      - action: utter_address
+      - intent: affirm
+      - action: utter_thank
+
+  - story: sssssss
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_address
+      - action: utter_address
+      - intent: ask_thank
+      - action: utter_goodbye
+
+  - story: assssssass
+    steps:
+      - intent: ask_address
+      - action: utter_address
+      - intent: ask_thank
+      - action: utter_thank
+
+  - story: happy path
+    steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_thank
+    - action: utter_thank
+
+  - story: goodbye path
+    steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+  - story: ask for course price
+    steps:
+    - intent: ask_price
+    - action: utter_price
+
+  - story: ask for course detail
+    steps:
+    - intent: ask_courseDetail
+    - action: utter_courseDetail
+
+  - story: ask for tutor detail
+    steps:
+    - intent: ask_tutorDetail
+    - action: utter_tutorDetail
+
+  - story: ask to register as tutor
+    steps:
+    - intent: ask_registTutor
+    - action: utter_registTutor
+
+  - story: ask to register for course
+    steps:
+    - intent: ask_registCourse
+    - action: utter_registCourse
+
+  - story: ask for list of my courses
+    steps:
+    - intent: ask_listMyCourse
+    - action: utter_listMyCourse
+
+  - story: ask for free courses
+    steps:
+    - intent: ask_freeOfCourse
+    - action: utter_freeOfCourse
+
+  - story: ask for free tutors
+    steps:
+    - intent: ask_freeOfTutor
+    - action: utter_freeOfTutor
+
+  - story: ask for address
+    steps:
+    - intent: ask_address
+    - action: utter_address
+
+  - story: bot challenge 2
+    steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+
+  - story: fallback
+    steps:
+    - action: utter_sorry
+
+  - story: unhappy path
+    steps:
+    - intent: mood_unhappy
+    - action: utter_unhappy
+    - intent: bot_challenge
+    - action: utter_iamabot
+
+  - story: greet and goodbye
+    steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: goodbye
+    - action: utter_goodbye
+
+  - story: happy path all
+    steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_name
+    - action: utter_help
+    - intent: ask_price
+    - action: utter_price
+    - intent: ask_registTutor
+    - action: utter_registTutor
+    - intent: ask_registCourse
+    - action: utter_registCourse
+    - intent: ask_courseDetail
+    - action: utter_courseDetail
+    - intent: ask_tutorDetail
+    - action: utter_tutorDetail
+    - intent: ask_listMyCourse
+    - action: utter_listMyCourse
+    - intent: ask_freeOfCourse
+    - action: utter_freeOfCourse
+    - intent: ask_freeOfTutor
+    - action: utter_freeOfTutor
+    - intent: ask_address
+    - action: utter_address
+    - intent: goodbye
+    - action: utter_goodbye
+
+  - story: path with denied course
+    steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_name
+    - action: utter_help
+    - intent: ask_registCourse
+    - action: utter_registCourse
+    - intent: deny
+    - action: utter_sorry
+    - intent: goodbye
+    - action: utter_goodbye
+
+  - story: path with denied tutor
+    steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_name
+    - action: utter_help
+    - intent: ask_registTutor
+    - action: utter_registTutor
+    - intent: deny
+    - action: utter_sorry
+    - intent: goodbye
+    - action: utter_goodbye
+
+  - story: path with mood unhappy
+    steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_name
+    - action: utter_help
+    - intent: mood_unhappy
+    - action: utter_cheer_up
+    - intent: affirm
+    - action: utter_goodbye
+
+  - story: path with bot challenge
+    steps:
+    - intent: bot_challenge
+    - action: utter_iamabot

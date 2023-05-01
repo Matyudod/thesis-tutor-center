@@ -1,0 +1,121 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - need_cheer_up
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - ask_thank
+  - ask_name
+  - ask_price
+  - ask_registTutor
+  - ask_registCourse
+  - ask_courseDetail
+  - ask_tutorDetail
+  - ask_listMyCourse
+  - ask_freeOfCourse
+  - ask_freeOfTutor
+  - ask_address
+
+entities:
+  - tutorName
+  - courseId
+
+slots:
+  tutorName:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: tutorName
+        action: action_set_tutor_name
+  courseId:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: courseId
+        action: action_set_course_id
+
+responses:
+  utter_greet:
+    - text: "Chào anh(chị)"
+    - text: "Chào mừng anh(chị) đến với trung tâm gia sư Duy Tâm"
+
+  utter_goodbye:
+    - text: "Tạm biệt và mong sớm gặp lại!"
+    - text: "Tạm biệt và chúc bạn có một ngày tốt lành!"
+
+  utter_cheer_up:
+    - text: "Cố lên bạn là được mà."
+
+  utter_did_that_help:
+    - text: "Điều đó đã giúp bạn?"
+
+  utter_help:
+    - text: "Tôi có thể giúp gì cho bạn"
+    - text: "Bạn cần gì"
+
+  utter_happy:
+    - text: "Tuyệt vời!"
+    - text: "Thật tuyệt"
+    - text: "Quá tuyệt"
+
+  utter_unhappy:
+    - text: "Xin lỗi, vì sự bất tiện này"
+    - text: "Chúng tôi sẽ rút kinh nghiệm cho lần sau"
+    - text: "Thành thật xin lỗi bạn"
+
+  utter_sorry:
+    - text: "Em xin lỗi, em chưa hiểu ý muốn của anh(chị) ạ. Anh chị có thể nói lại được không ạ"
+    - text: "Hiện tại tôi chưa hiểu được yêu cầu của bạn."
+
+  utter_iamabot:
+    - text: "Tôi là chatbot, được cung cấp bởi Trung Tâm gia sư Duy Tâm."
+
+  utter_registTutor:
+    - text: "Điền thông tin -> Gửi -> Đợi duyệt"
+
+  utter_registCourse:
+    - text: "Điền thông tin -> Gửi -> Đợi duyệt -> Và bạn có thể xem thông tin khoá học trong thông tin cá nhân"
+
+  utter_price:
+    - text: "<price>"
+
+  utter_courseDetail:
+    - text: "<course-detail>->{courseId}"
+
+  utter_tutorDetail:
+    - text: "<tutor-detail>->{tutorName}"
+
+  utter_listMyCourse:
+    - text: "<list-my-course>"
+
+  utter_freeOfCourse:
+    - text: "<free-of-course>->{courseId}"
+
+  utter_freeOfTutor:
+    - text: "<free-of-tutor>->{tutorName}"
+
+  utter_thank:
+    - text: "Cảm ơn bạn"
+    - text: "Dạ không có chi đâu ạ!"
+    - text: "Cảm ơn quý khách."
+
+  utter_address:
+    - text: "Hiện tại trung tâm có 2 trung tâm : <br><ul><li>Cơ sở 1: 672A28, Đường Phan Văn Trị, Phường 10, Quận Gò Vấp (Khu CityLand Park Hill)</li><li>Cơ sở 2: 375/2, Phạm Hùng, Khóm 3, Phường 8, Tp. Sóc Trăng</li></ul>"
+
+actions:
+  - action_set_tutor_name
+  - action_set_course_id
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+config:
+  store_entities_as_slots: false

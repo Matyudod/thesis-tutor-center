@@ -1,0 +1,28 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-courseId",
+      "2": "I-courseId",
+      "3": "L-courseId",
+      "4": "U-courseId",
+      "5": "B-tutorName",
+      "6": "I-tutorName",
+      "7": "L-tutorName",
+      "8": "U-tutorName",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-courseId": 1,
+      "I-courseId": 2,
+      "L-courseId": 3,
+      "U-courseId": 4,
+      "B-tutorName": 5,
+      "I-tutorName": 6,
+      "L-tutorName": 7,
+      "U-tutorName": 8,
+      "O": 0
+    },
+    "num_tags": 9
+  }
+]

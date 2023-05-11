@@ -12,6 +12,7 @@ router.route("/loginAdmin")
 .post(middlewares.isNotAdminAuthenticated, auths.loginAdminHandler);
 router.route("/sign-up")
 .get(middlewares.isNotAuthenticate, auths.signUp)
-.post(middlewares.isNotAuthenticate, auths.signUpHandler);
-router.route("/logout").get(middlewares.isAuthenticated, auths.logout)
+.post(middlewares.isNotAuthenticate, auths.sendEmailForSignUp);
+router.route("/verify-email-sign-up").post(middlewares.isNotAuthenticate,auths.signUpHandler);
+router.route("/logout").get(middlewares.isAuthenticated, auths.logout);
 module.exports = router;

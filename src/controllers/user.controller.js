@@ -130,6 +130,7 @@ class UserController {
     }
     
     async updateCourseHandler(req, res) {
+        let courseId = req.params.courseId;
         let cookies = new CookieProvider();
         cookies.setParamater(req, res);
         let classroomService = new ClassroomService();

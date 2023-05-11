@@ -17,7 +17,7 @@
                 </form>
             <% }
             if(userId == classA.user._id && !classA.isApproved){%>
-                <a href="/course-update" class='btn btn-primary m-3'>Cập nhật khóa học</a>
+                <a href="/user/course-update/<%= classA._id%>" class='btn btn-primary m-3'>Cập nhật khóa học</a>
             <% }%>
         </div>
     <% }%>

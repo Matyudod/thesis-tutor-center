@@ -14,7 +14,7 @@ router.route("/my-class-received")
         upload.single("formFile"),
         users.updateDocument
     );
-router.route("/course-update/:courseId").get(users.updateCourse)
+router.route("/course-update/:courseId").get(users.updateCourse).post(users.updateCourseHandler);
 router.route("/change-password").post(users.changePassword);
 router.route("/update-tutor-infomation").get(users.updateTutor).post(
     middlewares.isAuthenticated,

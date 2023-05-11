@@ -15,4 +15,4 @@ router.route("/sign-up")
 .post(middlewares.isNotAuthenticate, auths.sendEmailForSignUp);
 router.route("/verify-email-sign-up").post(middlewares.isNotAuthenticate,auths.signUpHandler);
 router.route("/logout").get(middlewares.isAuthenticated, auths.logout);
-module.exports = router;
+module.exports = router; 

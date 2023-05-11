@@ -8,7 +8,7 @@ const router = express.Router();
 let forms = new FormController();
 router
     .get("/course-register", forms.courseRegister)
-    .post("/course-register", middleware.isNotTutor, forms.courseRegisterHandler);
+    .post("/course-register",middleware.isAuthenticated, forms.courseRegisterHandler);
 router
     .route("/register-tutor")
     .get(forms.registerTutor)

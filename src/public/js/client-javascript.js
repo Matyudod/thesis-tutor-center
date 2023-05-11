@@ -386,7 +386,7 @@ function getUserInfo() {
         },
     ]);
     let content =
-        '<li class="d-flex justify-content-center "><img id="avartar" class="rounded-circle m-5 shadow-lg" width="150" height="150" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" alt="Avatar"></li>';
+        '<li class="d-flex justify-content-center "><img id="avartar" class="rounded-circle m-5 shadow-lg" width="150" height="150" src="/images/logo.png" alt="Avatar"></li>';
     content +=
         '<li class="text-center"><b>{{user_name}}</b></li><li><hr class="dropdown-divider"></li>';
 
